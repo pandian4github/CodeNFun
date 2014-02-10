@@ -174,7 +174,9 @@ void Hero::handle_input()
 		if(touches_computer==true)
 		{
 			if(compileCode(level))			//successful execution of program
-				levelChanged = 1;
+			{
+			//	levelChanged = 1;
+			}
 			touches_computer=false;
 		}
 	}
@@ -348,7 +350,14 @@ bool Hero::Touches_Bricks(collRectManager *myManager)
 		if(myManager->myCollRect[i].type==INTERACTIVE_OBJECT)
 		{
 			if(check_collision(box,myManager->myCollRect[i].box)==true)
-				touches_computer=true;
+			{
+				if(touches_computer==false)
+					touches_computer=true;
+				else if( i==4 )
+					levelChanged=1;
+			}
+			
+
 		}
 	}
 			

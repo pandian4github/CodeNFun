@@ -23,9 +23,18 @@ std::string getBgLocation(int level)
 void otherDisplays(int level)
 {
 	if(level == 1)
+	{	
+		animate_eva();
 		display_eva(window);
+	}
 }
-
+void otherInitializations(int level)
+{
+	if(level == 1)
+	{
+		Init_Eva(50,200);
+	}
+}
 int main()
 {
  
@@ -34,7 +43,8 @@ int main()
 
 	int SCENE = TUTORIAL;
 	int level = 0, tutorial = 1;
-	int collisionRects[3]={0,4,2};
+	int noOfTutorials[3] = {2,3,3};
+	int collisionRects[3]={0,5,2};
 	
 	sf::Sprite *bgsprite = new sf::Sprite;
 	sf::Texture bgtex;
@@ -93,8 +103,30 @@ int main()
 			{
 				if(SCENE == TUTORIAL)
 				{
-					tutorial++;
-					init_tutorial(level,tutorial); //move through tutorials
+					++tutorial;
+					if(tutorial > noOfTutorials[level])
+					{
+						--tutorial;
+					}
+					else
+					{
+						init_tutorial(level,tutorial); //move through tutorials
+					}
+				}
+			}
+			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::B))
+			{
+				if( SCENE == TUTORIAL )
+				{
+					--tutorial;
+					if(tutorial<1)
+					{
+						++tutorial;
+					}
+					else
+					{
+						init_tutorial(level,tutorial); //move through tutorials
+					}
 				}
 			}
         }
@@ -115,7 +147,7 @@ int main()
 			bgsprite->setTextureRect(sf::IntRect(0,0,1000,562));
 
 			init_tutorial(level,tutorial);
-		
+			otherInitializations(level);
 			//HERO
 			myHero = new Hero(700,300);
 			myHero->setLevel(level);

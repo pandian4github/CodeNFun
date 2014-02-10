@@ -24,7 +24,7 @@ void openCodingArea(int level)
 	//write your function here
 	char command[1024];
 
-	std::string cmd = "C:\\Installations\\Dev-Cpp\\devcpp.exe C:\\Users\\Ashwin\\FYP\\";
+	std::string cmd = "C:\\Dev-Cpp\\devcpp.exe C:\\Users\\FYP\\";
 	cmd += "codeForLevel" + std::to_string(level) + ".cpp";
 
 	std::cout<<"Start Coding";
@@ -41,24 +41,24 @@ bool compileCode(int level)
 	std::string cmd,ret;
 
 	//create .exe
-	cmd = "C:\\Installations\\Dev-Cpp\\bin\\g++.exe C:\\Users\\Ashwin\\FYP\\";
-	cmd += "codeForLevel" + std::to_string(level) + ".cpp -o C:\\Users\\Ashwin\\FYP\\execForLevel" + std::to_string(level);
+	cmd = "C:\\Dev-Cpp\\bin\\g++.exe C:\\Users\\FYP\\";
+	cmd += "codeForLevel" + std::to_string(level) + ".cpp -o C:\\Users\\FYP\\execForLevel" + std::to_string(level);
 	strcpy(command,cmd.c_str());
 	std::cout<<exec(command);
 
 	//run the .exe
-	cmd = "C:\\Users\\Ashwin\\FYP\\execForLevel";
-	cmd += std::to_string(level) + ".exe > C:\\Users\\Ashwin\\FYP\\solForLevel" + std::to_string(level) + ".txt";
+	cmd = "C:\\Users\\FYP\\execForLevel";
+	cmd += std::to_string(level) + ".exe > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + ".txt";
 	strcpy(command,cmd.c_str());
 	std::cout<<exec(command);
 
 	//compare the files
-	cmd = "FC C:\\Users\\Ashwin\\FYP\\solForLevel" + std::to_string(level) + ".txt" + " C:\\Users\\Ashwin\\FYP\\correctSolForLevel" + std::to_string(level) + ".txt" + " > C:\\Users\\Ashwin\\FYP\\diff.txt";
+	cmd = "FC C:\\Users\\FYP\\solForLevel" + std::to_string(level) + ".txt" + " C:\\Users\\FYP\\correctSolForLevel" + std::to_string(level) + ".txt" + " > C:\\Users\\FYP\\diff.txt";
 	strcpy(command,cmd.c_str());
 	std::cout<<exec(command);
 
 	std::ifstream inp;
-	inp.open("C:\\Users\\Ashwin\\FYP\\diff.txt");
+	inp.open("C:\\Users\\FYP\\diff.txt");
 	std::getline(inp, ret);
 	std::getline(inp, ret);
 	std::cout<<"return :: " << ret << "\n";
