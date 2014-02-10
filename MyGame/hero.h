@@ -339,7 +339,6 @@ bool Hero::Touches_Level_Edges_Vertical(collRectManager *myManager)
 }
 bool Hero::Touches_Bricks(collRectManager *myManager)
 {
-	
 	for(int i=0;i<myManager->totalRects;i++)
 	{
 		if(myManager->myCollRect[i].type==SOLID)
@@ -349,14 +348,21 @@ bool Hero::Touches_Bricks(collRectManager *myManager)
 		}
 		if(myManager->myCollRect[i].type==INTERACTIVE_OBJECT)
 		{
-			if(check_collision(box,myManager->myCollRect[i].box)==true)
+			if(level==1)
 			{
-				if(touches_computer==false)
-					touches_computer=true;
-				else if( i==4 )
-					levelChanged=1;
+				if(check_collision(box,myManager->myCollRect[i].box)==true)
+				{
+					if(touches_computer==false && i==2 )
+						touches_computer=true;
+					else if( i == 4 )
+						levelChanged=1;
+				}
+				else
+				{
+					if(i==2)
+						touches_computer = false;
+				}
 			}
-			
 
 		}
 	}
