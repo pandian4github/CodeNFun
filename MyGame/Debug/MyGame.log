@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿Build started 10-02-2014 23:05:03.
      1>Project "C:\Users\user\Documents\Visual Studio 2012\Projects\MyGame\MyGame\MyGame.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
@@ -8,7 +9,33 @@
      1>c:\users\user\documents\visual studio 2012\projects\mygame\mygame\animation.h(4): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
          Generating Code...
      1>Done Building Project "C:\Users\user\Documents\Visual Studio 2012\Projects\MyGame\MyGame\MyGame.vcxproj" (Build target(s)) -- FAILED.
+=======
+﻿Build started 2/11/2014 1:32:13 AM.
+     1>Project "C:\Users\Ashwin\documents\visual studio 2012\Projects\MyGame\MyGame\MyGame.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\FYP\SFML-2.1\include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_DYNAMIC /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Animation.cpp main.cpp
+         main.cpp
+     1>c:\users\ashwin\documents\visual studio 2012\projects\mygame\mygame\externalfunctions.h(31): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : see declaration of 'strcpy'
+     1>c:\users\ashwin\documents\visual studio 2012\projects\mygame\mygame\externalfunctions.h(46): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : see declaration of 'strcpy'
+     1>c:\users\ashwin\documents\visual studio 2012\projects\mygame\mygame\externalfunctions.h(52): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : see declaration of 'strcpy'
+     1>c:\users\ashwin\documents\visual studio 2012\projects\mygame\mygame\externalfunctions.h(57): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : see declaration of 'strcpy'
+         Animation.cpp
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Ashwin\documents\visual studio 2012\Projects\MyGame\Debug\MyGame.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\FYP\SFML-2.1\lib" "sfml-main-d.lib" "sfml-window-d.lib" "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Ashwin\documents\visual studio 2012\Projects\MyGame\Debug\MyGame.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Ashwin\documents\visual studio 2012\Projects\MyGame\Debug\MyGame.lib" /MACHINE:X86 Debug\Animation.obj
+         Debug\main.obj
+         MyGame.vcxproj -> C:\Users\Ashwin\documents\visual studio 2012\Projects\MyGame\Debug\MyGame.exe
+     1>Done Building Project "C:\Users\Ashwin\documents\visual studio 2012\Projects\MyGame\MyGame\MyGame.vcxproj" (Build target(s)).
+>>>>>>> 57f4b717cd1253a880eafe9da3b35ca63bbccb75
 
 Build FAILED.
 
+<<<<<<< HEAD
 Time Elapsed 00:00:01.38
+=======
+Time Elapsed 00:00:05.90
+>>>>>>> 57f4b717cd1253a880eafe9da3b35ca63bbccb75

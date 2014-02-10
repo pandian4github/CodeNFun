@@ -22,7 +22,7 @@ void init_tutorial(int tutorialLevel,int tutorialNo)
 
 	if(!tuttex.loadFromFile(imageLocation))
 	{
-		std::cout<<"\nError loading tut";
+		std::cout<<"\nError loading tut "<<imageLocation ;
 	}
 	tutsprite=new sf::Sprite();
 	tutsprite->setTexture(tuttex);
