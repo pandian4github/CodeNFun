@@ -9,7 +9,7 @@
 //Collision checking functions
 const int SOLID=0;
 const int INTERACTIVE_OBJECT=1;
-bool levelChanged = 1;
+bool levelChanged = 0;
 
 enum State
 {
