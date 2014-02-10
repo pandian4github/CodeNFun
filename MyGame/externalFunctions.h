@@ -77,6 +77,9 @@ bool compileCode(int level)
 	}
 }
 
-
+void testingFunction()
+{
+	// Do nothing.
+}
 
 #endif
