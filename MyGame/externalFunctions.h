@@ -41,9 +41,14 @@ bool compileCode(int level)
 	std::string cmd,ret;
 
 	//create .exe
+<<<<<<< HEAD
 	cmd = "C:\\Dev-Cpp\\MinGW64\\bin\\g++.exe C:\\Users\\FYP\\";
 	cmd += "codeForLevel" + std::to_string(level) + ".cpp -o C:\\Users\\FYP\\execForLevel" + std::to_string(level);
 	std::cout << std::endl << cmd << std::endl;
+=======
+	cmd = "C:\\Dev-Cpp\\bin\\g++.exe C:\\Users\\FYP\\";
+	cmd += "codeForLevel" + std::to_string(level) + ".cpp -o C:\\Users\\FYP\\execForLevel" + std::to_string(level);
+>>>>>>> 9c7b5c844307d9ce4e35de55c493cafe116b1176
 	strcpy(command,cmd.c_str());
 	std::cout<<exec(command);
 

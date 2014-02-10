@@ -53,11 +53,17 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>SFML_DYNAMIC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>E:\softwares\SFML-2.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\vs\SFML-2.1-windows-vc11-32bits\SFML-2.1\include</AdditionalIncludeDirectories>
+>>>>>>> 9c7b5c844307d9ce4e35de55c493cafe116b1176
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+<<<<<<< HEAD
       <AdditionalLibraryDirectories>E:\softwares\SFML-2.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+=======
+      <AdditionalLibraryDirectories>E:\vs\SFML-2.1-windows-vc11-32bits\SFML-2.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+>>>>>>> 9c7b5c844307d9ce4e35de55c493cafe116b1176
       <AdditionalDependencies>sfml-main-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-graphics-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
