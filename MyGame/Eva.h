@@ -38,7 +38,7 @@ void display_eva( sf::RenderWindow *window)
 void changeEvaPosition(int level)
 {
 	if(level==1)
-		myManager->chanagePosition(0,0,0,0,3); //3rd collision rectangle needs to be changed for level 1
+		myManager->changePosition(0,0,0,0,3); //3rd collision rectangle needs to be changed for level 1
 	evasprite->setPosition(0,0);
 }
 #endif
