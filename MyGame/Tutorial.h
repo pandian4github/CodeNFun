@@ -8,6 +8,15 @@ sf::Sprite *tutsprite;
 sf::Texture tuttex;
 sf::Music musicBuffer;
 bool playing;
+bool soundForLevelTutorial[10][10];
+
+void setSound(int level,int tutorial)
+{
+	if(level == 0)
+	{
+		soundForLevelTutorial[level][1]=soundForLevelTutorial[level][2]=soundForLevelTutorial[level][3]=soundForLevelTutorial[level][4]=1;
+	}
+}
     
 void init_tutorial(int tutorialLevel,int tutorialNo)
 {
@@ -29,6 +38,9 @@ void init_tutorial(int tutorialLevel,int tutorialNo)
 	tutsprite->setTextureRect(sf::IntRect(0,0,1000,562));
 	tutsprite->setPosition(0,0);
 
+	if(soundForLevelTutorial[tutorialLevel][tutorialNo]==1)
+		return;
+
 	std::string soundLocation = "Assets/sound";
 	soundLocation += std::to_string(tutorialLevel);
 	soundLocation += "_";
@@ -43,6 +55,7 @@ void init_tutorial(int tutorialLevel,int tutorialNo)
 	}
 
 	playing = false;
+	setSound(tutorialLevel,tutorialNo);
 }
 
 void show_tutorial( sf::RenderWindow *window)
@@ -55,8 +68,11 @@ void show_tutorial( sf::RenderWindow *window)
 	window->draw(*tutsprite);
 }
 
-void end_tutorial()
+void end_tutorial(int level,int tutorial)
 {
+	if(soundForLevelTutorial[level][tutorial+1]==1)
+		return;
+
 	playing=false;
 	musicBuffer.stop();
 }

@@ -93,7 +93,7 @@ int main()
 			{
 				if(SCENE == TUTORIAL)
 				{
-					end_tutorial();
+					end_tutorial(level,tutorial);
 					if(level == 0)
 						levelChanged =1;
 					SCENE=LEVEL;
