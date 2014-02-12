@@ -19,6 +19,24 @@ std::string exec(char* cmd) {
     return result;
 }
 
+int numberofLinesOfCode(int level)
+{
+	std::ifstream inp;
+	std::string fileLocation = "C:\\Users\\FYP\\codeForLevel" + std::to_string(level) + ".cpp";
+	inp.open(fileLocation);
+	int lineCount = 0;
+	for( std::string line; getline( inp, line ); )
+	{
+		if(line.compare("") == 0)
+			continue;
+		lineCount++;
+	}
+	std::cout << std::endl <<  std::endl <<  std::endl <<  std::endl <<  std::endl <<  std::endl ;
+	std::cout << std::endl << "..................................................." << std::endl;
+	std::cout << "Number of Lines of code : " << lineCount <<  std::endl;
+	std::cout <<"..................................................." << std::endl;
+	return lineCount;
+}
 void openCodingArea(int level)
 {
 	//write your function here
@@ -63,6 +81,8 @@ bool compileCode(int level)
 	std::getline(inp, ret);
 	std::cout<<"return :: " << ret << "\n";
 	size_t temp = ret.find("no differences encountered");
+
+	numberofLinesOfCode(level);
 
 	if(temp!=std::string::npos)
 	{

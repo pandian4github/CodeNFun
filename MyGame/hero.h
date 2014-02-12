@@ -355,7 +355,10 @@ bool Hero::Touches_Bricks(collRectManager *myManager)
 					if(touches_computer==false && i==2 )
 						touches_computer=true;
 					else if( i == 4 )
-						levelChanged=1;
+						{
+							//sf::Time time = gClock.getElapsedTime();
+							levelChanged=1;
+						}
 				}
 				else
 				{

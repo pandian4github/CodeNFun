@@ -2,6 +2,7 @@
 //
 
 #include <SFML/Graphics.hpp>
+#include <SFML/System/Clock.hpp>
 #include "iostream"
 #include "hero.h"
 #include "CollRectManager.h"
@@ -11,6 +12,7 @@
 const int LEVEL = 1;
 const int TUTORIAL = 0;
 sf::RenderWindow *window;
+sf::Clock gClock;
 
 std::string getBgLocation(int level)
 {
@@ -48,32 +50,10 @@ int main()
 	
 	sf::Sprite *bgsprite = new sf::Sprite;
 	sf::Texture bgtex;
+	sf::Clock lClock;
 	Hero *myHero;
 
 	//BACKGROUND
-
-	/*if(levelChanged)
-	{
-		if(!bgtex.loadFromFile("Assets/background1.png"))
-		{
-			std::cout<<"\nError loading background";
-		}
-		
-		bgsprite->setTexture(bgtex);
-		bgsprite->setTextureRect(sf::IntRect(0,0,1000,562));
-
-		//Load tutorial
-		Init_Eva(50,200);
-		init_tutorial(level,tutorial);
-		
-		//HERO
-		myHero=new Hero(700,300);
-		myHero->setLevel(level);
-		myManager->setTotalRects(collisionRects[level]);
-		myManager->initRects(level);
-		
-		levelChanged = 0;
-	}*/
 
 	init_tutorial(level,tutorial);
 
@@ -133,6 +113,15 @@ int main()
 
 		if(levelChanged)
 		{
+			sf::Time time = gClock.getElapsedTime();
+			if(level >= 1)
+			{
+				std::cout << std::endl << "..................................................." << std::endl;
+				std::cout << std::endl << "Time taken to complete level " << level << " : " << time.asSeconds() << " seconds." << std::endl;
+				std::cout << std::endl << "..................................................." << std::endl;
+				std::cout << std::endl <<  std::endl <<  std::endl <<  std::endl <<  std::endl <<  std::endl ;
+			}
+			gClock.restart();
 			level++;
 			tutorial = 1;
 
