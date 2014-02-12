@@ -14,7 +14,7 @@ void setSound(int level,int tutorial)
 {
 	if(level == 0)
 	{
-		soundForLevelTutorial[level][1]=soundForLevelTutorial[level][2]=soundForLevelTutorial[level][3]=soundForLevelTutorial[level][4]=1;
+		soundForLevelTutorial[level][1]=soundForLevelTutorial[level][2]=soundForLevelTutorial[level][3]=soundForLevelTutorial[level][4]=soundForLevelTutorial[level][5]=1;
 	}
 }
     

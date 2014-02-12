@@ -43,7 +43,7 @@ int main()
 
 	int SCENE = TUTORIAL;
 	int level = 0, tutorial = 1;
-	int noOfTutorials[3] = {4,3,3};
+	int noOfTutorials[3] = {5,3,3};
 	int collisionRects[3]={0,5,2};
 	
 	sf::Sprite *bgsprite = new sf::Sprite;
