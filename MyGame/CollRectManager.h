@@ -41,8 +41,8 @@ void collRectManager::initRects(int level)
 	if(level == 2)
 	{
 		myCollRect=new collRect[2];
-		myCollRect[0].setValues(0,435,1000,165,0);
-		myCollRect[1].setValues(0,385,275,50,0);
+		myCollRect[0].setValues(0,530,1000,1,0);
+		myCollRect[1].setValues(0,210,100,140,1);//385,275,50,0);
 	}
 }
 
