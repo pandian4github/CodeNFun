@@ -56,10 +56,10 @@ class Hero
 			 sf::Vector2f getCentre();
 
 			 //collision functions
-			  bool check_collision(sf::IntRect A, sf::IntRect B,int coll_type=SOLID);
-			  bool Touches_Level_Edges_Horizontal(collRectManager *myManager);
-			  bool Touches_Level_Edges_Vertical(collRectManager *myManager);
-			  bool Touches_Bricks(collRectManager *myManager);
+			 bool check_collision(sf::IntRect A, sf::IntRect B,int coll_type=SOLID);
+			 bool Touches_Level_Edges_Horizontal(collRectManager *myManager);
+			 bool Touches_Level_Edges_Vertical(collRectManager *myManager);
+			 bool Touches_Bricks(collRectManager *myManager);
 			
 };
 
@@ -356,7 +356,6 @@ bool Hero::Touches_Bricks(collRectManager *myManager)
 						touches_computer=true;
 					else if( i == 4 )
 						{
-							//sf::Time time = gClock.getElapsedTime();
 							levelChanged=1;
 						}
 				}
