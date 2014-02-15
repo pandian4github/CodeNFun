@@ -7,6 +7,7 @@
 #include "hero.h"
 #include "CollRectManager.h"
 #include "Eva.h"
+#include "ImageLoader.h"
 #include "Tutorial.h"
 
 const int LEVEL = 1;
@@ -36,8 +37,29 @@ void otherInitializations(int level)
 	{
 		Init_Eva(50,200);
 	}
+	Init_Image();
 }
 
+void checkCodeCompiled(int level)
+{
+	switch(level)
+	{
+	case 1 : if(runsuccess == 0)
+			 {
+				set_Image(645, 20, "Assets/try_again.png");
+				display_image(window);
+			 }
+			 else
+				 if(runsuccess == 1)
+				 {
+					set_Image(645, 20, "Assets/move_up.png");
+					display_image(window);
+				 }
+			break;
+
+
+	}
+}
 std::string getStringTime(int num)
 {
 	std::string ret = "";
@@ -91,9 +113,6 @@ int main()
 
     while (window->isOpen())
     {
-	//	window->clear();
-	//	window->draw(timer);
-	//	window->display();
         sf::Event event;
         while (window->pollEvent(event))
         {
@@ -172,6 +191,7 @@ int main()
 				std::cout << std::endl << "..................................................." << std::endl;
 				std::cout << std::endl <<  std::endl <<  std::endl <<  std::endl <<  std::endl <<  std::endl ;
 			}
+			runsuccess = 2;
 			gClock.restart();
 			level++;
 			tutorial = 1;
@@ -207,10 +227,12 @@ int main()
 				window->draw(timer);
 				window->draw(levelText);
 				otherDisplays(level);
+				checkCodeCompiled(level);
 				myHero->display(window);
 				break;
 			case TUTORIAL:
 				window->clear();
+				runsuccess = 2;
 				show_tutorial(window);
 				break;
 		}
