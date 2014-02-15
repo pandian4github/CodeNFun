@@ -5,6 +5,8 @@
 #include<cstring>
 #include<fstream>
 #include "Eva.h"
+#include "ImageLoader.h"
+int runsuccess;
 
 std::string exec(char* cmd) {
     FILE* pipe = _popen(cmd, "r");
@@ -87,12 +89,14 @@ bool compileCode(int level)
 	if(temp!=std::string::npos)
 	{
 		std::cout<<"Success";
+		runsuccess = 1;
 		changeEvaPosition(level);
 		return 1;
 	}
 	else
 	{
 		std::cout<<"Failure";
+		runsuccess = 0;
 		return 0;
 	}
 }
