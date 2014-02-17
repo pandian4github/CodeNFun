@@ -21,10 +21,10 @@ std::string exec(char* cmd) {
     return result;
 }
 
-int numberofLinesOfCode(int level)
+int numberofLinesOfCode(int level, int subLevel)
 {
 	std::ifstream inp;
-	std::string fileLocation = "C:\\Users\\FYP\\codeForLevel" + std::to_string(level) + ".cpp";
+	std::string fileLocation = "C:\\Users\\FYP\\codeForLevel" + std::to_string(level) + "_" + std::to_string(subLevel) + ".cpp";
 	inp.open(fileLocation);
 	int lineCount = 0;
 	for( std::string line; getline( inp, line ); )
@@ -39,20 +39,20 @@ int numberofLinesOfCode(int level)
 	std::cout <<"..................................................." << std::endl;
 	return lineCount;
 }
-void openCodingArea(int level)
+void openCodingArea(int level, int sublevel)
 {
 	//write your function here
 	char command[1024];
 
 	std::string cmd = "C:\\Dev-Cpp\\devcpp.exe C:\\Users\\FYP\\";
-	cmd += "codeForLevel" + std::to_string(level) + ".cpp";
+	cmd += "codeForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) +".cpp";
 
 	std::cout<<"Start Coding";
 	strcpy(command,cmd.c_str());
 	std::cout<<exec(command);
 }
 
-bool compileCode(int level)
+bool compileCode(int level, int sublevel)
 {
 	//write your function here
 	std::cout<<"Compile Code";
@@ -61,19 +61,29 @@ bool compileCode(int level)
 	std::string cmd,ret;
 
 	//create .exe
-	cmd = "C:\\Dev-Cpp\\MinGW64\\bin\\g++.exe C:\\Users\\FYP\\";
-	cmd += "codeForLevel" + std::to_string(level) + ".cpp -o C:\\Users\\FYP\\execForLevel" + std::to_string(level);
+	cmd = "C:\\Dev-Cpp\\bin\\g++.exe C:\\Users\\FYP\\";
+	cmd += "codeForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".cpp -o C:\\Users\\FYP\\execForLevel" + std::to_string(level) + "_" + std::to_string(sublevel);
 	strcpy(command,cmd.c_str());
 	std::cout<<exec(command);
 
 	//run the .exe
-	cmd = "C:\\Users\\FYP\\execForLevel";
-	cmd += std::to_string(level) + ".exe > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + ".txt";
-	strcpy(command,cmd.c_str());
-	std::cout<<exec(command);
+	if(level !=3 )
+	{
+		cmd = "C:\\Users\\FYP\\execForLevel";
+		cmd += std::to_string(level) + "_" + std::to_string(sublevel) + ".exe > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt";
+		strcpy(command,cmd.c_str());
+		std::cout<<exec(command);
+	}
+	else
+	{
+		cmd = "C:\\Users\\FYP\\execForLevel";
+		cmd += std::to_string(level) + "_" + std::to_string(sublevel) + ".exe < C:\\Users\\FYP\\inputForLevel3_1 > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt";
+		strcpy(command,cmd.c_str());
+		std::cout<<exec(command);
+	}
 
 	//compare the files
-	cmd = "FC C:\\Users\\FYP\\solForLevel" + std::to_string(level) + ".txt" + " C:\\Users\\FYP\\correctSolForLevel" + std::to_string(level) + ".txt" + " > C:\\Users\\FYP\\diff.txt";
+	cmd = "FC C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt" + " C:\\Users\\FYP\\correctSolForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt" + " > C:\\Users\\FYP\\diff.txt";
 	strcpy(command,cmd.c_str());
 	std::cout<<exec(command);
 
@@ -84,14 +94,29 @@ bool compileCode(int level)
 	std::cout<<"return :: " << ret << "\n";
 	size_t temp = ret.find("no differences encountered");
 
-	numberofLinesOfCode(level);
+	numberofLinesOfCode(level,sublevel);
 
 	if(temp!=std::string::npos)
 	{
-		std::cout<<"Success";
-		runsuccess = 1;
-		changeEvaPosition(level);
-		return 1;
+		if(level == 1)
+		{
+			std::cout<<"\nSuccess for level 1";
+			runsuccess = 1;
+			changeEvaPosition(level);
+			return 1;
+		}
+		if(level == 2)
+		{
+			std::cout<<"\nSuccess for level 2";
+			runsuccess = 1;
+			return 1;
+		}
+		if(level == 3)
+		{
+			std::cout<<"\nSuccess for level 3";
+			runsuccess = 1;
+			return 1;
+		}
 	}
 	else
 	{

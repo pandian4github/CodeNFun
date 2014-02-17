@@ -9,7 +9,7 @@
 //Collision checking functions
 const int SOLID=0;
 const int INTERACTIVE_OBJECT=1;
-bool levelChanged = 0;
+bool levelChanged = 0, subLevelChanged = 0;
 
 enum State
 {
@@ -31,7 +31,7 @@ class Hero
 			  sf::Texture herotex;
 			  Animation anim;
 
-			  int herostate,level;
+			  int herostate,level,subLevel;
 			  bool jump,idle;
 			  sf::IntRect walk_right,walk_left,idle_right,idle_left;
 			  bool touches_computer;
@@ -50,6 +50,7 @@ class Hero
 			 void setPosition(int x,int y);
 			 void setState(int);
 			 void setLevel(int l);
+			 void setSubLevel (int _subLevel);
             
              sf::IntRect getPosition();
 			 int getState();
@@ -164,7 +165,7 @@ void Hero::handle_input()
 	{
 		if(touches_computer==true)
 		{
-			openCodingArea(level);
+			openCodingArea(level,subLevel);
 			touches_computer=false;
 		}
 	}
@@ -173,9 +174,9 @@ void Hero::handle_input()
 	{
 		if(touches_computer==true)
 		{
-			if(compileCode(level))			//successful execution of program
+			if(compileCode(level,subLevel))			//successful execution of program
 			{
-			//	levelChanged = 1;
+				subLevelChanged = 1;
 			}
 			touches_computer=false;
 		}
@@ -210,14 +211,8 @@ void Hero::update(collRectManager *myManager)
 
 void Hero::display(sf::RenderWindow *window)
 {
-	//sf::Shape rect;
-	//rect->setFillColor(sf::Color(255,255,255,255));
-	//rect->setPosition(box.left,box.top);
-	
 	herosprite->setPosition((float)box.left,(float)box.top);
 	window->draw(*herosprite);
-	//window->draw(*rect);
-	
 }
 sf::Vector2f Hero::getCentre()
 {
@@ -243,6 +238,11 @@ void Hero::setState(int a)
 void Hero::setLevel(int l)
 {
 	level = l;
+}
+
+void Hero::setSubLevel(int _subLevel)
+{
+	subLevel = _subLevel;
 }
 
 int Hero::getState()
@@ -348,22 +348,72 @@ bool Hero::Touches_Bricks(collRectManager *myManager)
 		}
 		if(myManager->myCollRect[i].type==INTERACTIVE_OBJECT)
 		{
-			if(level==1)
+			switch(level)
 			{
-				if(check_collision(box,myManager->myCollRect[i].box)==true)
-				{
-					if(touches_computer==false && i==2 )
-						touches_computer=true;
-					else if( i == 4 )
+				case 1:
+					if(check_collision(box,myManager->myCollRect[i].box)==true)
+					{
+						if(touches_computer==false && i==2 )
+						{
+							touches_computer=true;
+						}
+						else if( i == 4 )
 						{
 							levelChanged=1;
 						}
-				}
-				else
-				{
-					if(i==2)
-						touches_computer = false;
-				}
+					}
+					else
+					{
+						if(i==2)
+						{
+							touches_computer = false;
+						}
+					}
+					break;
+
+				case 2:
+					if(check_collision(box,myManager->myCollRect[i].box)==true)
+					{
+						if(touches_computer==false && i==2 ) //2nd  collision rectangle is computer collision rectangle
+						{
+							touches_computer=true;
+						}
+						else if( i == 3 )
+						{
+							levelChanged=1;
+						}
+					}
+					else
+					{
+						if( i == 2 )
+						{
+							touches_computer = false;
+						}
+					}
+					break;
+				case 3:
+					if(check_collision(box,myManager->myCollRect[i].box)==true)
+					{
+						if(touches_computer==false && i==2 ) //2nd  collision rectangle is computer collision rectangle
+						{
+							touches_computer=true;
+						}
+						else if( i == 3 )
+						{
+							levelChanged=1;
+						}
+					}
+					else
+					{
+						if( i == 2 )
+						{
+							touches_computer = false;
+						}
+					}
+					break;
+				default:
+					std::cout<<"\nError with collision rectangle detection";
+					break;
 			}
 
 		}
