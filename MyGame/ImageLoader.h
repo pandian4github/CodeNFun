@@ -10,15 +10,15 @@ void Init_Image()
 	imagesprite=new sf::Sprite();
 }
 
-void set_Image(int x, int y, std::string imageLocation)
+void set_Image(int xpos, int ypos, int width, int height, std::string imageLocation)
 {
 	if(!imagetex.loadFromFile(imageLocation))
 	{
 		std::cout<<"\nError loading image at " << imageLocation << std::endl;
 	}
 	imagesprite->setTexture(imagetex);
-	imagesprite->setTextureRect(sf::IntRect(0,0,150,200));
-	imagesprite->setPosition((float)x,(float)y);
+	imagesprite->setTextureRect(sf::IntRect(0,0,width,height));
+	imagesprite->setPosition((float)xpos,(float)ypos);
 
 }	
 void display_image( sf::RenderWindow *window)

@@ -23,12 +23,53 @@ std::string getBgLocation(int level)
 	return bgLocation;
 }
 
-void otherDisplays(int level)
+void otherDisplays(int level, int subLevel)
 {
 	if(level == 1)
 	{	
 		animate_eva();
 		display_eva(window);
+	}
+	if(level == 2)
+	{
+		if(subLevel == 1) //display int question 
+		{
+			set_Image(109,133,185,146,"Assets/int_mul_question.png");	//set int question
+			display_image(window);										//display
+		}
+		else if(subLevel == 2)//display int result for 3 secs and switch over to float
+		{
+			set_Image(148,385,60,85,"Assets/green_button_level2.png");		//first green light
+			display_image(window);
+			set_Image(109,133,185,146,"Assets/float_div_question.png");		//float question
+			display_image(window);//display
+		}
+		else if(subLevel == 3)//display double result and display platform
+		{
+			set_Image(148,385,60,85,"Assets/green_button_level2.png");		//first green light
+			display_image(window);
+			set_Image(199,384,60,85,"Assets/green_button_level2.png");		//second green light
+			display_image(window);
+			set_Image(109,133,185,146,"Assets/double_add_question.png");	//double question
+			display_image(window);//display
+		}
+		else
+		{
+			set_Image(148,385,60,85,"Assets/green_button_level2.png");		//first green light
+			display_image(window);
+			set_Image(199,384,60,85,"Assets/green_button_level2.png");		//second green light
+			display_image(window);
+			set_Image(252,384,60,85,"Assets/green_button_level2.png");		//third green light
+			display_image(window);
+			set_Image(109,133,185,146,"Assets/double_add_answer.png");		//double answer question
+			display_image(window);											//display
+			set_Image(314,448, 294, 59,"Assets/floor_level2.png");
+			display_image(window);
+		}
+	}
+	if(level == 3)
+	{
+		
 	}
 }
 void otherInitializations(int level)
@@ -40,25 +81,54 @@ void otherInitializations(int level)
 	Init_Image();
 }
 
-void checkCodeCompiled(int level)
+void checkCodeCompiled(int level, int subLevel)
 {
 	switch(level)
 	{
 	case 1 : if(runsuccess == 0)
 			 {
-				set_Image(645, 20, "Assets/try_again.png");
+				set_Image(645, 20, 155, 136, "Assets/try_again.png");
 				display_image(window);
 			 }
 			 else
 				 if(runsuccess == 1)
 				 {
-					set_Image(645, 20, "Assets/move_up.png");
+					set_Image(645, 20, 155, 136, "Assets/move_up.png");
 					display_image(window);
 				 }
 			break;
-
-
+	case 2: 
+			break;
+	case 3: if(runsuccess == 0)
+			{
+				set_Image(0,218,131,284,"Assets/closed_gate.png");
+				display_image(window);
+			}
+			else
+			{
+				if(runsuccess == 1)
+				{
+					set_Image(0, 215, 117, 280, "Assets/opened_gate.png");
+					display_image(window);
+				}
+				else
+				{
+					set_Image(0,218,131,284,"Assets/closed_gate.png");
+					display_image(window);
+				}
+			}
+			break;
+	default:
+			break;
 	}
+}
+
+void collisionRectangleChange(int level,int subLevel)
+{
+	if(level == 2 && subLevel == 4)
+		myManager->changePosition(20,490,690,1,1);	//include the complete platform
+	if(level == 3)
+		myManager->changePosition(0,0,1,1,1);		//gate opened
 }
 std::string getStringTime(int num)
 {
@@ -75,9 +145,10 @@ int main()
 	window->setFramerateLimit(20);
 
 	int SCENE = TUTORIAL;
-	int level = 0, tutorial = 1;
-	int noOfTutorials[3] = {5,3,3};
-	int collisionRects[3]={0,5,2};
+	int level = 0, tutorial = 1, subLevel = 1;
+	int noOfTutorials[4] = {5,6,10,2};
+	int noOfSubLevels[4] = {0,0,3,0};
+	int collisionRects[4] = {0,5,4,4};
 	
 	sf::Sprite *bgsprite = new sf::Sprite;
 	sf::Texture bgtex;
@@ -181,6 +252,16 @@ int main()
 			levelText.setString("Level : " + getStringTime(level));
 		}
 
+		if(subLevelChanged)
+		{
+			if(subLevel <= noOfSubLevels[level])
+			{
+				subLevel++;
+			}
+			collisionRectangleChange(level,subLevel);
+			subLevelChanged = 0;
+		}
+
 		if(levelChanged)
 		{
 			sf::Time time = gClock.getElapsedTime();
@@ -195,6 +276,7 @@ int main()
 			gClock.restart();
 			level++;
 			tutorial = 1;
+			subLevel = 1;
 
 			std::string bgLocation = getBgLocation(level);
 
@@ -211,6 +293,7 @@ int main()
 			//HERO
 			myHero = new Hero(700,300);
 			myHero->setLevel(level);
+			myHero->setSubLevel(subLevel);
 			myManager->setTotalRects(collisionRects[level]);
 			myManager->initRects(level);
 
@@ -226,8 +309,9 @@ int main()
 				window->draw(*bgsprite);
 				window->draw(timer);
 				window->draw(levelText);
-				otherDisplays(level);
-				checkCodeCompiled(level);
+				otherDisplays(level,subLevel);
+				checkCodeCompiled(level,subLevel);
+				myHero->setSubLevel(subLevel);
 				myHero->display(window);
 				break;
 			case TUTORIAL:
