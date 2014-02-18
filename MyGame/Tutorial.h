@@ -2,6 +2,7 @@
 #define TUTORIAL_H
 #include "SFML\Graphics.hpp"
 #include "SFML\Audio.hpp"
+#include "SFML\Audio\Music.hpp"
 #include <iostream>
 
 sf::Sprite *tutsprite;
@@ -26,7 +27,7 @@ void setSound(int level,int tutorial)
 	case 3:
 		break;
 	default:
-		std::cout<<"\nError setting sound for level";
+		std::cout<<"Error setting sound for level " << std::endl;
 	}
 }
     
@@ -39,11 +40,11 @@ void init_tutorial(int tutorialLevel,int tutorialNo)
 	imageLocation += std::to_string(tutorialNo);
 	imageLocation += ".png";
 
-	std::cout<<imageLocation;
+	//std::cout<<imageLocation;
 
 	if(!tuttex.loadFromFile(imageLocation))
 	{
-		std::cout<<"\nError loading tut "<<imageLocation ;
+		std::cout<<"\nError loading tutorial : " << imageLocation << std::endl;
 	}
 	tutsprite=new sf::Sprite();
 	tutsprite->setTexture(tuttex);
@@ -59,11 +60,11 @@ void init_tutorial(int tutorialLevel,int tutorialNo)
 	soundLocation += std::to_string(tutorialNo);
 	soundLocation += ".wav";
 
-	std::cout<<soundLocation;
+	//std::cout<<soundLocation;
 
 	if (!musicBuffer.openFromFile(soundLocation))
 	{
-       std::cout<<"\nError loading sound file";
+		std::cout<<"Error loading sound file " << soundLocation << std::endl;
 	}
 
 	playing = false;

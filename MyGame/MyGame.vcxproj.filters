@@ -47,7 +47,14 @@
     <ClInclude Include="ImageLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Robo.h">
+=======
+    <ClInclude Include="Intellisense.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WebsiteInteractor.h">
+>>>>>>> 2c7aee5add09be9d67a90facf022a508f3ebd460
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -90,8 +90,13 @@
     <ClInclude Include="externalFunctions.h" />
     <ClInclude Include="hero.h" />
     <ClInclude Include="ImageLoader.h" />
+<<<<<<< HEAD
     <ClInclude Include="Robo.h" />
+=======
+    <ClInclude Include="Intellisense.h" />
+>>>>>>> 2c7aee5add09be9d67a90facf022a508f3ebd460
     <ClInclude Include="Tutorial.h" />
+    <ClInclude Include="WebsiteInteractor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
