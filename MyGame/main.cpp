@@ -11,7 +11,7 @@
 #include "Tutorial.h"
 #include "WinHttpClient.h"
 #include "Intellisense.h"
-
+#include "WebsiteInteractor.h"
 
 const int LEVEL = 1;
 const int TUTORIAL = 0;
@@ -174,9 +174,6 @@ void collisionRectangleChange(int level,int subLevel)
 int main()
 {
  
-	window=new sf::RenderWindow(sf::VideoMode(1000,562), "Final Year Project",sf::Style::Close);
-	window->setFramerateLimit(20);
-
 	int SCENE = TUTORIAL;
 	int level = 0, tutorial = 1, subLevel = 1;
 	int noOfTutorials[4] = {5,6,10,2};
@@ -185,6 +182,58 @@ int main()
 	int targetTimeInt[5] = {0, 75, 255, 120, 200};
 	bool firsttime = true;
 	int timeForThisLevel;
+
+	//Choice between guest play and login play
+	std::string user ="";
+	std::string username = "";
+	std::string password = "";
+	char choice;
+	
+	std::cout << "Welcome to Code N Fun. Have fun while learning programming ! " << std::endl << std::endl;
+	
+	//while begins
+	while(true) {
+		std::cout << "Press 'G' to play as a guest or 'L' to login with your account : ";
+		std::cin >> choice;
+		if(choice == 'G' || choice == 'g') {
+			user="guest";
+			break;
+		}
+		else 
+			if(choice == 'L' || choice == 'l')
+			{
+				std::cout << "Enter your username : ";
+				std::cin >> username;
+				std::cout << "Enter your password : ";
+				std::cin >> password;
+
+				int ret = checkLogin(username, password);
+				if(ret == -1) {
+					std::cout << "Invalid username/password combination ! Try again." << std::endl << std::endl;
+					continue;
+				}
+				else
+					if(ret == -2) {
+						std::cout << "Server down ! Please try again." << std::endl << std::endl;
+						continue;
+					}
+					else {
+						level = ret;
+						std::cout << "Successfully logged in ! " << std::endl << std::endl;
+						user = username;
+						break;
+
+					}
+
+
+			}
+			else
+				continue;
+	}//while loop ends
+	
+
+	window=new sf::RenderWindow(sf::VideoMode(1000,562), "Final Year Project",sf::Style::Close);
+	window->setFramerateLimit(20);
 
 	showhero = 1;
 	gameover = 0;
@@ -251,68 +300,6 @@ int main()
 
 	//BACKGROUND
 
-	std::string user ="";
-	std::string username = "";
-	std::string password = "";
-	char choice;
-	while(true) {
-		std::cout << "Type 'G' to play as a guest or 'L' to login with your account : ";
-		std::cin >> choice;
-		if(choice == 'G' || choice == 'g') {
-			user="guest";
-			break;
-		}
-		else 
-			if(choice == 'L' || choice == 'l')
-			{
-				std::cout << "Enter your username : ";
-				std::cin >> username;
-				std::cout << "Enter your password : ";
-				std::cin >> password;
-
-				std::string url = "";
-				url.append("http://localhost/codenfun/checklogin-ext.php?username=");
-				url.append(username);
-				url.append("&password=");
-				url.append(password);
-				
-				std::wstring wurl(url.begin(), url.end());
-			
-				WinHttpClient client(wurl);
-				client.SendHttpRequest();
-				wstring httpResponseHeader = client.GetResponseHeader();
-				wstring httpResponseContent = client.GetResponseContent();
-
-				std::string response = "";		
-				int length = httpResponseContent.length();
-				
-				for(int i = 0; i < length; i++) {
-					response += (char)httpResponseContent.at(i);
-				}
-			
-
-				if(response.at(0) == 'Y') {
-					int l = 0;
-					
-					for(int i = 1; i < length; i++) {
-						l = l * 10 + response.at(i) - 48;
-					}
-					
-					level = l;
-					std::cout << "Successfully logged in ! " << std::endl << std::endl;
-					user = username;
-					break;
-				}
-				else
-					if(response.at(0) == 'N') {
-						std::cout << "Invalid username/password combination ! Try again." << std::endl << std::endl;
-						continue;
-					}
-
-			}
-			else
-				continue;
-	}
 	//std::cout << "levels completed : " << level << std::endl;
 	init_tutorial(level,tutorial);
 	if(level >=1) {
@@ -418,7 +405,6 @@ int main()
 			hintRequired = false;
 			hintText.setString("");
 
-			attempts = 3;
 			wpressed = 0;
 			deathflag = 0;
 
@@ -428,7 +414,17 @@ int main()
 				int performance = getPerformance(level, secondsTakenToComplete);
 				setDifficultyForNextLevel(level, performance);
 				setTimeVariance();
+				if(level == 2)
+						subLevel--;
+				int pSize = programSize(level, subLevel);
+				int numberOfAttemptsTaken = 3 - attempts + 1;
+				printReport(secondsTakenToComplete, targetTimeInt[level], pSize, numberOfAttemptsTaken, performance, level, executionTime);
+				if(username.compare("guest") != 0)
+					updateLog(username, level, secondsTakenToComplete, numberOfAttemptsTaken, executionTime, pSize);
 			}
+
+			attempts = 3;
+			executionTime = 0.0;
 			firsttime = false;
 			level++;
 
@@ -438,7 +434,7 @@ int main()
 			//Set target time
 			timeForThisLevel = targetTimeInt[level];
 			timeForThisLevel = timeForThisLevel + timeToIncrease - timeToDecrease;
-			std::cout << timeToIncrease << "  " << timeToDecrease << std::endl;
+			//std::cout << timeToIncrease << "  " << timeToDecrease << std::endl;
 			//std::cout << "time for this level-" << level << " is : " << timeForThisLevel << std::endl;
 			//std::cout << getStringFromSeconds(timeForThisLevel) << std::endl;
 			targetTime.setString("Target : " + getStringFromSeconds(timeForThisLevel));

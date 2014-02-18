@@ -22,18 +22,18 @@ sf::Text hintText;
 int printTimetakentoCompleteLevel(int level) {
 
 	sf::Time time = gClock.getElapsedTime();
-	std::cout << std::endl << "..................................................." << std::endl;
+	/*std::cout << std::endl << "..................................................." << std::endl;
 	std::cout << std::endl << "Time taken to complete level " << level << " : " << time.asSeconds() << " seconds." << std::endl;
 	std::cout << std::endl << "..................................................." << std::endl;
 	std::cout << std::endl <<  std::endl <<  std::endl <<  std::endl <<  std::endl <<  std::endl ;
-	return (int)time.asSeconds();
+	*/return (int)time.asSeconds();
 }
 
 int getPerformance(int level, int secondsTaken) {
 	int averageTime = 0;
 	int ret = AVERAGE;
 	switch(level) {
-		case 1 : averageTime = 25;
+		case 1 : averageTime = 75;
 				 break;
 		case 2 : averageTime = 255;
 				 break;
@@ -45,7 +45,7 @@ int getPerformance(int level, int secondsTaken) {
 
 	if(secondsTaken > averageTime) {
 		int diff = secondsTaken - averageTime;
-		std::cout << "diff : " << diff << std::endl;
+		//std::cout << "diff : " << diff << std::endl;
 		if(diff <= 10) 
 			ret = AVERAGE;
 		else
@@ -57,7 +57,7 @@ int getPerformance(int level, int secondsTaken) {
 
 	if(secondsTaken <= averageTime) {
 		int diff = averageTime - secondsTaken;
-		std::cout << "diff : " << diff << std::endl;
+		//std::cout << "diff : " << diff << std::endl;
 		if(diff <= 10) 
 			ret = AVERAGE;
 		else
@@ -70,7 +70,7 @@ int getPerformance(int level, int secondsTaken) {
 	return ret;
 }
 void setDifficultyForNextLevel(int level, int performance) {
-	std::cout << "Setting levelDifficulty to : " << performance << std::endl;
+	//std::cout << "Setting levelDifficulty to : " << performance << std::endl;
 	levelDifficulty = performance;
 }
 void setTimeVariance() {
@@ -117,6 +117,39 @@ void displayHintIfRequired(int level) {
 		}
 	}
 
+}
+
+int programSize(int level, int subLevel)
+{
+	std::ifstream inp;
+	std::string fileLocation = "C:\\Users\\FYP\\codeForLevel" + std::to_string(level) + "_" + std::to_string(subLevel) + ".cpp";
+	inp.open(fileLocation);
+	int lineCount = 0;
+	int charcount = 0;
+	for( std::string line; getline( inp, line ); )
+	{
+		if(line.compare("") == 0)
+			continue;
+		charcount += line.length();
+		lineCount++;
+	}
+	/*std::cout << std::endl <<  std::endl <<  std::endl <<  std::endl <<  std::endl <<  std::endl ;
+	std::cout << std::endl << "..................................................." << std::endl;
+	std::cout << "Program size written by you : " << charcount <<  std::endl;
+	std::cout <<"..................................................." << std::endl;
+	*/
+	return charcount;
+}
+
+void printReport(int seconds, int targetSeconds, int pSize, int attempts, int performance, int level, float execTime) {
+	string performanceString[] = {"NEED TO WORK HARD", "NOT BAD", "AVERAGE", "GOOD", "EXCELLENT"};
+	std::cout << std::endl << "---------------------- Report for level " << level << " ----------------------" << std::endl;
+	std::cout << "Target time for the level         :	" << targetSeconds << std::endl;
+	std::cout << "Time taken to complete the level  :	" << seconds << std::endl;
+	std::cout << "Program size                      :	" << pSize << std::endl;
+	std::cout << "Program execution time            :	" << execTime << std::endl;
+	std::cout << "Overall performace                :	" << performanceString[performance] << std::endl;
+	std::cout << "-----------------------------------------------------------------" << std::endl;
 }
 
 #endif

@@ -4,9 +4,11 @@
 #include<iostream>
 #include<cstring>
 #include<fstream>
+#include<time.h>
 #include "Eva.h"
 #include "ImageLoader.h"
 int runsuccess;
+float executionTime;
 
 std::string exec(char* cmd) {
     FILE* pipe = _popen(cmd, "r");
@@ -21,24 +23,6 @@ std::string exec(char* cmd) {
     return result;
 }
 
-int numberofLinesOfCode(int level, int subLevel)
-{
-	std::ifstream inp;
-	std::string fileLocation = "C:\\Users\\FYP\\codeForLevel" + std::to_string(level) + "_" + std::to_string(subLevel) + ".cpp";
-	inp.open(fileLocation);
-	int lineCount = 0;
-	for( std::string line; getline( inp, line ); )
-	{
-		if(line.compare("") == 0)
-			continue;
-		lineCount++;
-	}
-	std::cout << std::endl <<  std::endl <<  std::endl <<  std::endl <<  std::endl <<  std::endl ;
-	std::cout << std::endl << "..................................................." << std::endl;
-	std::cout << "Number of Lines of code : " << lineCount <<  std::endl;
-	std::cout <<"..................................................." << std::endl;
-	return lineCount;
-}
 void openCodingArea(int level, int sublevel)
 {
 	//write your function here
@@ -47,15 +31,15 @@ void openCodingArea(int level, int sublevel)
 	std::string cmd = "C:\\Dev-Cpp\\devcpp.exe C:\\Users\\FYP\\";
 	cmd += "codeForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) +".cpp";
 
-	std::cout<<"Start Coding";
+	std::cout << std::endl << "Start Coding ! " << std::endl << std::endl;
 	strcpy(command,cmd.c_str());
-	std::cout<<exec(command);
+	exec(command);
 }
 
 bool compileCode(int level, int sublevel)
 {
 	//write your function here
-	std::cout<<"Compile Code";
+	std::cout<<"Compiling Code . . . " << std::endl << std::endl;
 
 	char command[1024];
 	std::string cmd,ret;
@@ -64,63 +48,68 @@ bool compileCode(int level, int sublevel)
 	cmd = "C:\\Dev-Cpp\\MinGW64\\bin\\g++.exe C:\\Users\\FYP\\";
 	cmd += "codeForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".cpp -o C:\\Users\\FYP\\execForLevel" + std::to_string(level) + "_" + std::to_string(sublevel);
 	strcpy(command,cmd.c_str());
-	std::cout<<exec(command);
+	exec(command);
 
+	clock_t t1, t2;
+	t1 = clock();
 	//run the .exe
 	if(level !=3 )
 	{
 		cmd = "C:\\Users\\FYP\\execForLevel";
 		cmd += std::to_string(level) + "_" + std::to_string(sublevel) + ".exe > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt";
 		strcpy(command,cmd.c_str());
-		std::cout<<exec(command);
+		exec(command);
 	}
 	else
 	{
 		cmd = "C:\\Users\\FYP\\execForLevel";
 		cmd += std::to_string(level) + "_" + std::to_string(sublevel) + ".exe < C:\\Users\\FYP\\inputForLevel3_1.txt > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt";
 		strcpy(command,cmd.c_str());
-		std::cout<<exec(command);
+		exec(command);
 	}
+	t2 = clock();
+	executionTime = (float)((float)t2 - (float)t1) / CLOCKS_PER_SEC;
+	std::cout << executionTime;
 
 	//compare the files
 	cmd = "FC C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt" + " C:\\Users\\FYP\\correctSolForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt" + " > C:\\Users\\FYP\\diff.txt";
 	strcpy(command,cmd.c_str());
-	std::cout<<exec(command);
+	exec(command);
 
 	std::ifstream inp;
 	inp.open("C:\\Users\\FYP\\diff.txt");
 	std::getline(inp, ret);
 	std::getline(inp, ret);
-	std::cout<<"return :: " << ret << "\n";
+	//std::cout<<"return :: " << ret << "\n";
 	size_t temp = ret.find("no differences encountered");
 
-	numberofLinesOfCode(level,sublevel);
+	//programSize(level,sublevel);
 
 	if(temp!=std::string::npos)
 	{
 		if(level == 1)
 		{
-			std::cout<<"\nSuccess for level 1";
+			//std::cout<<"\nSuccess for level 1";
 			runsuccess = 1;
 			changeEvaPosition(level);
 			return 1;
 		}
 		if(level == 2)
 		{
-			std::cout<<"\nSuccess for level 2";
+			//std::cout<<"\nSuccess for level 2";
 			runsuccess = 1;
 			return 1;
 		}
 		if(level == 3)
 		{
-			std::cout<<"\nSuccess for level 3";
+			//std::cout<<"\nSuccess for level 3";
 			runsuccess = 1;
 			return 1;
 		}
 	}
 	else
 	{
-		std::cout<<"Failure";
+		//std::cout<<"Failure";
 		runsuccess = 0;
 		return 0;
 	}
