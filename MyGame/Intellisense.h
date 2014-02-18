@@ -41,6 +41,8 @@ int getPerformance(int level, int secondsTaken) {
 				 break;
 		case 4 : averageTime = 200;
 				 break;
+		case 5 : averageTime = 200;
+				 break;
 	}
 
 	if(secondsTaken > averageTime) {

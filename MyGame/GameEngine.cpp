@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
 #include "iostream"
-#include "hero.h"
+#include "Character.h"
 #include "CollRectManager.h"
 #include "Eva.h"
 #include "Robo.h"
@@ -289,16 +289,10 @@ int main()
  
 	int SCENE = TUTORIAL;
 	int level = 0, tutorial = 1, subLevel = 1;
-<<<<<<< HEAD
 	int noOfTutorials[6] = {5,6,10,2,3,4};
 	int noOfSubLevels[6] = {0,0,3,0,0,0};
 	int collisionRects[6] = {0,5,4,4,6,5};
-=======
-	int noOfTutorials[4] = {5,6,10,2};
-	int noOfSubLevels[4] = {0,0,3,0};
-	int collisionRects[4] = {0,5,4,4};
-	int targetTimeInt[5] = {0, 75, 255, 120, 200};
->>>>>>> 2c7aee5add09be9d67a90facf022a508f3ebd460
+	int targetTimeInt[6] = {0, 75, 255, 120, 200, 200};
 	bool firsttime = true;
 	int timeForThisLevel;
 
@@ -538,7 +532,7 @@ int main()
 				int pSize = programSize(level, subLevel);
 				int numberOfAttemptsTaken = 3 - attempts + 1;
 				printReport(secondsTakenToComplete, targetTimeInt[level], pSize, numberOfAttemptsTaken, performance, level, executionTime);
-				if(username.compare("guest") != 0)
+				if(user.compare("guest") != 0)
 					updateLog(username, level, secondsTakenToComplete, numberOfAttemptsTaken, executionTime, pSize);
 			}
 

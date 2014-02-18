@@ -1,5 +1,5 @@
-#ifndef EXTERNALFUNCTIONS_H
-#define EXTERNALFUNCTIONS_H
+#ifndef COMPILATIONUNIT_H
+#define COMPILATIONUNIT_H
 
 #include<iostream>
 #include<cstring>
@@ -67,7 +67,6 @@ bool compileCode(int level, int sublevel)
 		strcpy(command,cmd.c_str());
 		exec(command);
 	}
-<<<<<<< HEAD
 	else if(level == 4 )
 	{
 		//give correct input file
@@ -77,11 +76,9 @@ bool compileCode(int level, int sublevel)
 		std::cout<<exec(command);
 		return 1;
 	}
-=======
 	t2 = clock();
 	executionTime = (float)((float)t2 - (float)t1) / CLOCKS_PER_SEC;
 	std::cout << executionTime;
->>>>>>> 2c7aee5add09be9d67a90facf022a508f3ebd460
 
 	//compare the files
 	cmd = "FC C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt" + " C:\\Users\\FYP\\correctSolForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt" + " > C:\\Users\\FYP\\diff.txt";

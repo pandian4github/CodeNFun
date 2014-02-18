@@ -4,7 +4,7 @@
 #include <SFML\Graphics.hpp>
 #include "Animation.h"
 #include "CollRectManager.h"
-#include "externalFunctions.h"
+#include "CompilationUnit.h"
 
 //Collision checking functions
 const int SOLID=0;
