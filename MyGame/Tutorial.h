@@ -2,6 +2,7 @@
 #define TUTORIAL_H
 #include "SFML\Graphics.hpp"
 #include "SFML\Audio.hpp"
+#include "SFML\Audio\Music.hpp"
 #include <iostream>
 
 sf::Sprite *tutsprite;

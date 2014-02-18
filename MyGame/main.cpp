@@ -10,16 +10,17 @@
 #include "ImageLoader.h"
 #include "Tutorial.h"
 #include "WinHttpClient.h"
+#include "Intellisense.h"
+
 
 const int LEVEL = 1;
 const int TUTORIAL = 0;
-int attempts;
+
 int deathflag;
 int showhero;
 int gameover;
 
 sf::RenderWindow *window;
-sf::Clock gClock;
 sf::Text attemptsText;
 
 std::string getStringTime(int num)
@@ -29,6 +30,16 @@ std::string getStringTime(int num)
 	ret = digits[num / 10] + digits[num % 10];
 	return ret;
 }
+
+std::string getStringFromSeconds(int seconds) {
+	int hour = seconds / 3600;
+	int rem = seconds % 3600;
+	int min = rem / 60;
+	int sec = rem % 60;
+	std::string timeToSet = getStringTime(hour) + ":" + getStringTime(min) + ":" + getStringTime(sec);
+	return timeToSet;
+}
+
 
 std::string getBgLocation(int level)
 {
@@ -103,16 +114,6 @@ void checkCodeCompiled(int level, int subLevel)
 		{
 			attempts--;
 			deathflag = 1;
-
-			/*sf::Clock lClock;
-			lClock.restart();
-			while(true) {
-				sf::Time lTime = lClock.getElapsedTime();
-				int sec = (int)lTime.asSeconds();
-				if(sec >=3)
-					break;
-			}*/
-
 		}
 		if(attempts < 0)
 		{
@@ -181,7 +182,10 @@ int main()
 	int noOfTutorials[4] = {5,6,10,2};
 	int noOfSubLevels[4] = {0,0,3,0};
 	int collisionRects[4] = {0,5,4,4};
+	int targetTimeInt[5] = {0, 75, 255, 120, 200};
 	bool firsttime = true;
+	int timeForThisLevel;
+
 	showhero = 1;
 	gameover = 0;
 
@@ -204,18 +208,41 @@ int main()
 	timer.setStyle(sf::Text::Bold);
 	timer.setPosition(10, 10);
 	
+	sf::Text targetTime;
+	targetTime.setFont(font);
+	targetTime.setCharacterSize(35);
+	targetTime.setString("00:00:00");
+	targetTime.setColor(sf::Color::Green);
+	targetTime.setStyle(sf::Text::Bold);
+	targetTime.setPosition(240, 10);
+	
 	sf::Text levelText;
 	levelText.setFont(font);
 	levelText.setCharacterSize(35);
 	levelText.setString("Level : 0");
-	levelText.setColor(sf::Color::Red);
+	levelText.setColor(sf::Color::Green);
 	levelText.setStyle(sf::Text::Bold);
 	levelText.setPosition(830, 10);
+
+	sf::Text oopsText;
+	oopsText.setFont(font);
+	oopsText.setCharacterSize(25);
+	oopsText.setString("Oops ! Nefario dies.");
+	oopsText.setColor(sf::Color::Blue);
+	oopsText.setStyle(sf::Text::Bold);
+	oopsText.setPosition(350, 200);
+
+	hintText.setFont(font);
+	hintText.setCharacterSize(20);
+	hintText.setString("");
+	hintText.setColor(sf::Color::White);
+	hintText.setStyle(sf::Text::Bold);
+	hintText.setPosition(100, 70);
 
 	attemptsText.setFont(font);
 	attemptsText.setCharacterSize(35);
 	attemptsText.setColor(sf::Color::Red);
-	attemptsText.setPosition(370, 10);
+	attemptsText.setPosition(580, 10);
 	attemptsText.setStyle(sf::Text::Bold);
 	attemptsText.setString("Lives : 3");
 
@@ -231,55 +258,60 @@ int main()
 	while(true) {
 		std::cout << "Type 'G' to play as a guest or 'L' to login with your account : ";
 		std::cin >> choice;
-		if(choice == 'G') {
+		if(choice == 'G' || choice == 'g') {
 			user="guest";
 			break;
 		}
-		else {
-			std::cout << "Enter your username : ";
-			std::cin >> username;
-			std::cout << "Enter your password : ";
-			std::cin >> password;
+		else 
+			if(choice == 'L' || choice == 'l')
+			{
+				std::cout << "Enter your username : ";
+				std::cin >> username;
+				std::cout << "Enter your password : ";
+				std::cin >> password;
 
-			string url = "";
-			url.append("http://localhost/codenfun/checklogin-ext.php?username=");
-			url.append(username);
-			url.append("&password=");
-			url.append(password);
-			//std::cout << url << std::endl;
-			std::wstring wurl(url.begin(), url.end());
+				std::string url = "";
+				url.append("http://localhost/codenfun/checklogin-ext.php?username=");
+				url.append(username);
+				url.append("&password=");
+				url.append(password);
+				
+				std::wstring wurl(url.begin(), url.end());
 			
-			WinHttpClient client(wurl);
-			client.SendHttpRequest();
-			wstring httpResponseHeader = client.GetResponseHeader();
-			wstring httpResponseContent = client.GetResponseContent();
+				WinHttpClient client(wurl);
+				client.SendHttpRequest();
+				wstring httpResponseHeader = client.GetResponseHeader();
+				wstring httpResponseContent = client.GetResponseContent();
 
-			string response = "";
-			int length = httpResponseContent.length();
-//			std::cout << "length of response : " << length << std::endl;
-			for(int i = 0; i < length; i++) {
-				response += (char)httpResponseContent.at(i);
-			}
-			
-//			std::cout << "response : " << response << std::endl;
-
-			if(response.at(0) == 'Y') {
-				int l = 0;
-				for(int i = 1; i < length; i++) {
-					l = l * 10 + response.at(i) - 48;
+				std::string response = "";		
+				int length = httpResponseContent.length();
+				
+				for(int i = 0; i < length; i++) {
+					response += (char)httpResponseContent.at(i);
 				}
-				level = l;
-				std::cout << "Successfully logged in ! " << std::endl << std::endl;
-				user = username;
-				break;
+			
+
+				if(response.at(0) == 'Y') {
+					int l = 0;
+					
+					for(int i = 1; i < length; i++) {
+						l = l * 10 + response.at(i) - 48;
+					}
+					
+					level = l;
+					std::cout << "Successfully logged in ! " << std::endl << std::endl;
+					user = username;
+					break;
+				}
+				else
+					if(response.at(0) == 'N') {
+						std::cout << "Invalid username/password combination ! Try again." << std::endl << std::endl;
+						continue;
+					}
+
 			}
 			else
-				if(response.at(0) == 'N') {
-					std::cout << "Invalid username/password combination ! Try again." << std::endl << std::endl;
-					continue;
-				}
-
-		}
+				continue;
 	}
 	//std::cout << "levels completed : " << level << std::endl;
 	init_tutorial(level,tutorial);
@@ -348,14 +380,8 @@ int main()
 		if(level >=1)
 		{
 			int seconds = (int)time.asSeconds();
-			//std::cout << (int)time.asSeconds() << std::endl;
-			int hour = seconds / 3600;
-			int rem = seconds % 3600;
-			int min = rem / 60;
-			int sec = rem % 60;
-			std::string timeToSet = getStringTime(hour) + ":" + getStringTime(min) + ":" + getStringTime(sec);
+			std::string timeToSet = getStringFromSeconds(seconds);
 			timer.setString(timeToSet);
-
 			levelText.setString("Level : " + getStringTime(level));
 
 		}
@@ -387,22 +413,38 @@ int main()
 
 		if(levelChanged)
 		{
-			sf::Time time = gClock.getElapsedTime();
+			levelDifficulty = AVERAGE;
+			timeToIncrease = timeToDecrease = 0;
+			hintRequired = false;
+			hintText.setString("");
+
 			attempts = 3;
 			wpressed = 0;
 			deathflag = 0;
-			if(!firsttime)
-			{
-				std::cout << std::endl << "..................................................." << std::endl;
-				std::cout << std::endl << "Time taken to complete level " << level << " : " << time.asSeconds() << " seconds." << std::endl;
-				std::cout << std::endl << "..................................................." << std::endl;
-				std::cout << std::endl <<  std::endl <<  std::endl <<  std::endl <<  std::endl <<  std::endl ;
+
+			//Do not get the metrics for the first time the user enters the game
+			if(!firsttime){
+				int secondsTakenToComplete = printTimetakentoCompleteLevel(level);
+				int performance = getPerformance(level, secondsTakenToComplete);
+				setDifficultyForNextLevel(level, performance);
+				setTimeVariance();
 			}
 			firsttime = false;
+			level++;
+
+			//Set number of lives remaining
 			attemptsText.setString("Lives : 3");
+
+			//Set target time
+			timeForThisLevel = targetTimeInt[level];
+			timeForThisLevel = timeForThisLevel + timeToIncrease - timeToDecrease;
+			std::cout << timeToIncrease << "  " << timeToDecrease << std::endl;
+			//std::cout << "time for this level-" << level << " is : " << timeForThisLevel << std::endl;
+			//std::cout << getStringFromSeconds(timeForThisLevel) << std::endl;
+			targetTime.setString("Target : " + getStringFromSeconds(timeForThisLevel));
+
 			runsuccess = 2;
 			gClock.restart();
-			level++;
 			tutorial = 1;
 			subLevel = 1;
 
@@ -428,6 +470,8 @@ int main()
 
 			levelChanged = 0;
 		}
+	
+		displayHintIfRequired(level);
 
 		switch(SCENE)
 		{
@@ -436,14 +480,19 @@ int main()
 				myHero->update(myManager);
 				window->clear();
 				window->draw(*bgsprite);
-				window->draw(timer);
+				window->draw(targetTime);
 				window->draw(levelText);
-				window->draw(attemptsText);
+				window->draw(hintText);
 				otherDisplays(level,subLevel);
+				window->draw(timer);
 				checkCodeCompiled(level,subLevel);
+				window->draw(attemptsText);
 				myHero->setSubLevel(subLevel);
 				if(showhero == 1) {
 					myHero->display(window);
+				}
+				else {
+					window->draw(oopsText);
 				}
 				break;
 			case TUTORIAL:
