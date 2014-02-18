@@ -77,7 +77,7 @@ bool compileCode(int level, int sublevel)
 	else
 	{
 		cmd = "C:\\Users\\FYP\\execForLevel";
-		cmd += std::to_string(level) + "_" + std::to_string(sublevel) + ".exe < C:\\Users\\FYP\\inputForLevel3_1 > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt";
+		cmd += std::to_string(level) + "_" + std::to_string(sublevel) + ".exe < C:\\Users\\FYP\\inputForLevel3_1.txt > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt";
 		strcpy(command,cmd.c_str());
 		std::cout<<exec(command);
 	}

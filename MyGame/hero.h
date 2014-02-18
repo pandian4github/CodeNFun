@@ -203,9 +203,9 @@ void Hero::update(collRectManager *myManager)
 		box.top+=yVel;
 		yVel=0;
 		jump=false;
-		 
 	}
 	
+	//if y > screen height -> fell down -> game over
 	anim.next();
 }
 
