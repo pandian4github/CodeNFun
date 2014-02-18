@@ -61,7 +61,7 @@ bool compileCode(int level, int sublevel)
 	std::string cmd,ret;
 
 	//create .exe
-	cmd = "C:\\Dev-Cpp\\bin\\g++.exe C:\\Users\\FYP\\";
+	cmd = "C:\\Dev-Cpp\\MinGW64\\bin\\g++.exe C:\\Users\\FYP\\";
 	cmd += "codeForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".cpp -o C:\\Users\\FYP\\execForLevel" + std::to_string(level) + "_" + std::to_string(sublevel);
 	strcpy(command,cmd.c_str());
 	std::cout<<exec(command);

@@ -10,6 +10,7 @@
 const int SOLID=0;
 const int INTERACTIVE_OBJECT=1;
 bool levelChanged = 0, subLevelChanged = 0;
+int wpressed;
 
 enum State
 {
@@ -174,6 +175,7 @@ void Hero::handle_input()
 	{
 		if(touches_computer==true)
 		{
+			wpressed = 1;
 			if(compileCode(level,subLevel))			//successful execution of program
 			{
 				subLevelChanged = 1;
@@ -195,6 +197,12 @@ void Hero::update(collRectManager *myManager)
 	
 	if(yVel>TERMINAL_VELOCITY)
 		yVel=yVel+GRAVITY;
+	
+	if(box.top > 560) {
+		wpressed = 1;
+		runsuccess = 0;
+		setPosition(800, 300);
+	}
 	box.top-=yVel;
 	
 	//if( Touches_Level_Edges_Vertical(myManager)||Touches_Bricks(myManager))
