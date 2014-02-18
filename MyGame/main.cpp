@@ -7,6 +7,7 @@
 #include "hero.h"
 #include "CollRectManager.h"
 #include "Eva.h"
+#include "Robo.h"
 #include "ImageLoader.h"
 #include "Tutorial.h"
 #include "WinHttpClient.h"
@@ -84,7 +85,115 @@ void otherDisplays(int level, int subLevel)
 	}
 	if(level == 3)
 	{
-		
+		;
+	}
+	if(level == 4)
+	{
+		if(runsuccess == 1)
+		{
+			//Animation_Code
+			if(finishedMoving != 1)
+			{
+				if(!robo1Initialized)
+				{
+					if(move3==1)
+					{
+						Init_Robo1(150,80);//end
+						robo1Initialized=1;
+						robo2Initialized=0;
+					}
+					else if(move2==1)
+					{
+						Init_Robo1(310,80);//middle
+						robo1Initialized=1;
+						robo2Initialized=0;
+					}
+					else if(move1==1)
+					{
+						Init_Robo1(470,80);//start
+						robo1Initialized=1;
+						robo2Initialized=0;
+					}
+				}
+				if(!move3)
+					animate_robo_move(level);
+				finishedStanding=0;
+			}
+			else
+			{
+				if(!robo2Initialized)
+				{
+					if(move3==1)
+					{
+						Init_Robo2(150,80);//end
+						robo2Initialized=1;
+						robo1Initialized=0;
+					}
+					else if(move2==1)
+					{
+						Init_Robo2(310,80);//middle
+						robo2Initialized=1;
+						robo1Initialized=0;
+					}
+					else if(move1==1)
+					{
+						Init_Robo2(470,80);//start
+						robo2Initialized=1;
+						robo1Initialized=0;
+					}
+				}
+				animate_robo_stand(level);
+				if(finishedStanding)
+					finishedMoving=0;
+			}
+			display_robo(window);
+
+			if((move1 || move2) && !move3)
+			{
+				set_Image(370,223,180,296,"Assets/opened_door.png");//1st door close -> open
+				display_image(window);
+				set_Image(190,223,180,296,"Assets/opened_door.png");//2nd door open
+				display_image(window);
+				set_Image(41,215,180,296,"Assets/closed_door.png");//3rd door close
+				display_image(window);
+				myManager->changePosition(0,0,1,1,1);
+				myManager->changePosition(0,0,1,1,2);
+			}
+			else if(move3)
+			{
+				set_Image(370,223,180,296,"Assets/opened_door.png");//1st door close -> open
+				display_image(window);
+				set_Image(190,223,180,296,"Assets/opened_door.png");//2nd door open
+				display_image(window);
+				set_Image(41,223,180,296,"Assets/opened_door.png");//3rd door close -> open
+				display_image(window);
+				myManager->changePosition(0,0,1,1,3);
+			}
+			else
+			{
+				set_Image(370,215,180,296,"Assets/closed_door.png");//1st door close
+				display_image(window);
+				set_Image(190,223,180,296,"Assets/opened_door.png");//2nd door open
+				display_image(window);
+				set_Image(41,215,180,296,"Assets/closed_door.png");//3rd door close
+				display_image(window);
+			}
+		}
+		else if(runsuccess == 0)
+		{
+			//failure
+		}
+		else
+		{
+			//initial configuration
+			set_Image(370,215,180,296,"Assets/closed_door.png");//1st door close
+			display_image(window);
+			set_Image(190,223,180,296,"Assets/opened_door.png");//2nd door open
+			display_image(window);
+			set_Image(41,215,180,296,"Assets/closed_door.png");//3rd door close
+			display_image(window);
+			display_robo(window);
+		}
 	}
 }
 void otherInitializations(int level)
@@ -92,6 +201,10 @@ void otherInitializations(int level)
 	if(level == 1)
 	{
 		Init_Eva(50,200);
+	}
+	if(level == 4)
+	{
+		Init_Robo1(630,80);
 	}
 	Init_Image();
 }
@@ -178,9 +291,9 @@ int main()
 
 	int SCENE = TUTORIAL;
 	int level = 0, tutorial = 1, subLevel = 1;
-	int noOfTutorials[4] = {5,6,10,2};
-	int noOfSubLevels[4] = {0,0,3,0};
-	int collisionRects[4] = {0,5,4,4};
+	int noOfTutorials[6] = {5,6,10,2,3,4};
+	int noOfSubLevels[6] = {0,0,3,0,0,0};
+	int collisionRects[6] = {0,5,4,4,6,5};
 	bool firsttime = true;
 	showhero = 1;
 	gameover = 0;

@@ -90,6 +90,7 @@
     <ClInclude Include="externalFunctions.h" />
     <ClInclude Include="hero.h" />
     <ClInclude Include="ImageLoader.h" />
+    <ClInclude Include="Robo.h" />
     <ClInclude Include="Tutorial.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

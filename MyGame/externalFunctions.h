@@ -67,19 +67,28 @@ bool compileCode(int level, int sublevel)
 	std::cout<<exec(command);
 
 	//run the .exe
-	if(level !=3 )
+	if(level ==1 || level == 2 )
 	{
 		cmd = "C:\\Users\\FYP\\execForLevel";
 		cmd += std::to_string(level) + "_" + std::to_string(sublevel) + ".exe > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt";
 		strcpy(command,cmd.c_str());
 		std::cout<<exec(command);
 	}
-	else
+	else if(level == 3)
 	{
 		cmd = "C:\\Users\\FYP\\execForLevel";
 		cmd += std::to_string(level) + "_" + std::to_string(sublevel) + ".exe < C:\\Users\\FYP\\inputForLevel3_1.txt > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt";
 		strcpy(command,cmd.c_str());
 		std::cout<<exec(command);
+	}
+	else if(level == 4 )
+	{
+		//give correct input file
+		cmd = "C:\\Users\\FYP\\execForLevel";
+		cmd += std::to_string(level) + "_" + std::to_string(sublevel) + ".exe < C:\\Users\\FYP\\inputForLevel4_1.txt > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt";
+		strcpy(command,cmd.c_str());
+		std::cout<<exec(command);
+		return 1;
 	}
 
 	//compare the files
@@ -105,15 +114,21 @@ bool compileCode(int level, int sublevel)
 			changeEvaPosition(level);
 			return 1;
 		}
-		if(level == 2)
+		else if(level == 2)
 		{
 			std::cout<<"\nSuccess for level 2";
 			runsuccess = 1;
 			return 1;
 		}
-		if(level == 3)
+		else if(level == 3)
 		{
 			std::cout<<"\nSuccess for level 3";
+			runsuccess = 1;
+			return 1;
+		}
+		else if(level == 4)
+		{
+			std::cout<<"\nSuccess for level 4";
 			runsuccess = 1;
 			return 1;
 		}

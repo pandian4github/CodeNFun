@@ -56,6 +56,16 @@ void collRectManager::initRects(int level)
 		myCollRect[3].setValues(0,300,40,200,1); //gate opened
 		break;
 	
+	case 4:
+		myCollRect = new collRect[6];
+		myCollRect[0].setValues(0,470,1000,1,0); //platform
+		myCollRect[1].setValues(500,280,1,270,0); //gate 1
+		myCollRect[2].setValues(320,280,1,270,0); //gate 2
+		myCollRect[3].setValues(165,280,1,270,0); //gate 3
+		myCollRect[4].setValues(720,365,50,100,1); //computer
+		myCollRect[5].setValues(5,280,1,270,1); //end
+		break;
+
 	default:
 		std::cout<<"\nError initializing collision rectangles";
 	}
