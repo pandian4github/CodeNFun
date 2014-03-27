@@ -85,7 +85,7 @@ Hero::Hero(int x, int y)
 
 		  anim.set_Strip("Assets/herosprite.png");
 		  anim.set_Frame(idle_right);
-		  anim.set_TargetTexture(&herotex); // link the spider's texture to the animator
+		  anim.set_TargetTexture(&herotex); // link the character's texture to the animator
 		  anim.set_TotalFrames(1);
 		  anim.set_Delay(2);
 		  anim.set_Step(1);
