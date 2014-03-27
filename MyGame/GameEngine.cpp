@@ -511,29 +511,40 @@ int main()
 						}
 						else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Return)
 						{
-							if(username.length() > 0)
-								usernameEntered = true;
-							else
+							if(password.length() > 0)
 							{
 								//do validation
 								int ret = checkLogin(username, password);
 								if(ret == -1) {
 									std::cout << "Invalid username/password combination ! Try again." << std::endl << std::endl;
+									password = "";
+									passwordStar = "";
+									passText.setString("type password");
 									continue;
 								}
 								else
 									if(ret == -2) {
 										std::cout << "Server down ! Please try again." << std::endl << std::endl;
+										password = "";
+										passwordStar = "";
+										passText.setString("type password");
 										continue;
 									}
 									else {
 										level = ret;
 										std::cout << "Successfully logged in ! " << std::endl << std::endl;
 										user = username;
+										if(level != 1)
+											++tutorial;
+										init_tutorial(level, tutorial);
+										levelChanged = 1;
 										break;
 
 									}
 							}
+							else
+								if(username.length() > 0)
+									usernameEntered = true;
 
 						}
 						else if (event.type == sf::Event::TextEntered)
@@ -623,6 +634,7 @@ int main()
 			}
         }
 
+	//	std::cout << "level : " << level << std::endl;
 
 		sf::Time time = gClock.getElapsedTime();
 		if(level >=1)
