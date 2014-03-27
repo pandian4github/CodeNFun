@@ -193,6 +193,13 @@ void otherDisplays(int level, int subLevel)
 		else if(runsuccess == 0)
 		{
 			//failure
+			set_Image(370,215,180,296,"Assets/closed_door.png");//1st door close
+			display_image(window);
+			set_Image(190,223,180,296,"Assets/opened_door.png");//2nd door open
+			display_image(window);
+			set_Image(41,215,180,296,"Assets/closed_door.png");//3rd door close
+			display_image(window);
+			display_robo(window);
 		}
 		else
 		{
@@ -289,23 +296,27 @@ int main()
  
 	int SCENE = TUTORIAL;
 	int level = 0, tutorial = 1, subLevel = 1;
-	int noOfTutorials[6] = {5,6,10,2,3,4};
+	int noOfTutorials[6] = {6,6,10,2,12,4};
 	int noOfSubLevels[6] = {0,0,3,0,0,0};
 	int collisionRects[6] = {0,5,4,4,6,5};
 	int targetTimeInt[6] = {0, 75, 255, 120, 200, 200};
 	bool firsttime = true;
+	bool usernameEntered = false;
+	int playerTypeDefined = 0;
 	int timeForThisLevel;
 
 	//Choice between guest play and login play
 	std::string user ="";
 	std::string username = "";
 	std::string password = "";
+	std::string passwordStar = "";
+
 	char choice;
 	
 	std::cout << "Welcome to Code N Fun. Have fun while learning programming ! " << std::endl << std::endl;
 	
 	//while begins
-	while(true) {
+	/*while(true) {
 		std::cout << "Press 'G' to play as a guest or 'L' to login with your account : ";
 		std::cin >> choice;
 		if(choice == 'G' || choice == 'g') {
@@ -343,7 +354,7 @@ int main()
 			else
 				continue;
 	}//while loop ends
-	
+	*/
 
 	window=new sf::RenderWindow(sf::VideoMode(1000,562), "Final Year Project",sf::Style::Close);
 	window->setFramerateLimit(20);
@@ -356,13 +367,39 @@ int main()
 	sf::Clock lClock;
 	sf::Time lTime;
 	sf::Text timer;
-	sf::Font font;
+	sf::Font font,comicFont;
+	
+	std::string input;
+
 	if(!(font.loadFromFile("Assets/arial.ttf")))
 	{
 		std::cout << "Error loading font ! " << std::endl;
 	}
 
+	if(!(comicFont.loadFromFile("Assets/Comic_Book.ttf")))
+	{
+		std::cout << "Error loading font ! " << std::endl;
+	}
+
+	sf::Text guestInfo("Press 'G' to play as a guest or 'L' to login",comicFont,30);
+	sf::Text usernameText("Username:",comicFont,35);
+	sf::Text passwordText("Password:",comicFont,35);
+	sf::Text userText("type username",font,35);
+	sf::Text passText("type password",font,35);
+
+	guestInfo.setColor(sf::Color::Black);
+	guestInfo.setPosition(128,265);
 	
+	usernameText.setColor(sf::Color::Black);
+	passwordText.setColor(sf::Color::Black);
+	userText.setColor(sf::Color::Black);
+	passText.setColor(sf::Color::Black);
+	
+	usernameText.setPosition(270,245);
+	passwordText.setPosition(270,305);
+	userText.setPosition(530,245);
+	passText.setPosition(530,305);
+
 	timer.setFont(font);
 	timer.setCharacterSize(35);
 	timer.setString("00:00:00");
@@ -428,6 +465,117 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window->close();
+			else if(level == 0 && tutorial == 1)
+			{
+				if(playerTypeDefined)
+				{
+					//check player type
+					if(playerTypeDefined==1)
+					{
+						user = "guest";
+						++tutorial;
+						init_tutorial(level,tutorial);
+					}
+					else if(playerTypeDefined==2)//provide login if the player is not a guest
+					{
+						if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::BackSpace)
+						{
+							if(!usernameEntered)
+							{
+								if(username.length() > 0)
+								{
+									username = username.substr(0,username.length() - 1);
+									userText.setString(username);
+								}
+								else
+								{
+									userText.setString("type username");
+								}
+							}
+							else
+							{
+								if(password.length() > 0)
+								{
+									password = password.substr(0,password.length() - 1);
+									passwordStar = passwordStar.substr(0,password.length() - 1);
+									passText.setString(passwordStar);
+								}
+								else
+								{
+									usernameEntered = false;
+									username = username.substr(0,username.length() - 1);
+									userText.setString(username);
+									passText.setString("type password");
+								}
+							}
+						}
+						else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Return)
+						{
+							if(username.length() > 0)
+								usernameEntered = true;
+							else
+							{
+								//do validation
+								int ret = checkLogin(username, password);
+								if(ret == -1) {
+									std::cout << "Invalid username/password combination ! Try again." << std::endl << std::endl;
+									continue;
+								}
+								else
+									if(ret == -2) {
+										std::cout << "Server down ! Please try again." << std::endl << std::endl;
+										continue;
+									}
+									else {
+										level = ret;
+										std::cout << "Successfully logged in ! " << std::endl << std::endl;
+										user = username;
+										break;
+
+									}
+							}
+
+						}
+						else if (event.type == sf::Event::TextEntered)
+						{
+							if(!usernameEntered)
+							{
+								if(event.text.unicode < 128 && event.text.unicode > 31)
+								{
+									username += static_cast<char>(event.text.unicode);
+									userText.setString(username);
+								}
+							}
+							else
+							{
+								if(event.text.unicode < 128 && event.text.unicode > 31)
+								{
+									password += static_cast<char>(event.text.unicode);
+									passwordStar += "*";
+									passText.setString(passwordStar);
+								}
+							}
+						}
+					}
+				}
+				else
+				{
+					if(sf::Keyboard::isKeyPressed(sf::Keyboard::G))
+					{
+						cout<<"playerdefined";
+						playerTypeDefined = 1;
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::L)
+					{
+						playerTypeDefined = 2;
+					}
+					else
+					{
+						;
+					}
+
+				}
+			}
 			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::T))
 			{
 				if(SCENE!=TUTORIAL)
@@ -608,6 +756,19 @@ int main()
 				window->clear();
 				runsuccess = 2;
 				show_tutorial(window);
+				if(level == 0 && tutorial == 1)
+				{
+					if(playerTypeDefined==0)
+						window->draw(guestInfo);
+					else if(playerTypeDefined==2)
+					{
+						window->draw(usernameText);
+						window->draw(passwordText);
+						if(usernameEntered)
+							window->draw(passText);
+						window->draw(userText);
+					}
+				}
 				break;
 		}
 		window->display();

@@ -47,9 +47,9 @@ void animate_robo_move(int level)
 {
 	if(level == 4)
 	{
-		frame_count1 = (frame_count1+1)%160;
-		if(frame_count1<159)
-			robosprite->move(-1,0);
+		frame_count1 = (frame_count1+1)%80;
+		if(frame_count1<79)
+			robosprite->move(-2,0);
 		else
 		{
 			finishedMoving = 1;

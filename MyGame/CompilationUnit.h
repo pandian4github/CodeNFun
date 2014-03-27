@@ -44,6 +44,11 @@ bool compileCode(int level, int sublevel)
 	char command[1024];
 	std::string cmd,ret;
 
+	/*if(level == 4)
+	{
+		runsuccess=1;
+		return 1;
+	}*/
 	//create .exe
 	cmd = "C:\\Dev-Cpp\\MinGW64\\bin\\g++.exe C:\\Users\\FYP\\";
 	cmd += "codeForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".cpp -o C:\\Users\\FYP\\execForLevel" + std::to_string(level) + "_" + std::to_string(sublevel);
@@ -53,7 +58,7 @@ bool compileCode(int level, int sublevel)
 	clock_t t1, t2;
 	t1 = clock();
 	//run the .exe
-	if(level ==1 || level == 2 )
+	if(level ==1 || level == 2 || level ==4)
 	{
 		cmd = "C:\\Users\\FYP\\execForLevel";
 		cmd += std::to_string(level) + "_" + std::to_string(sublevel) + ".exe > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt";
@@ -67,7 +72,7 @@ bool compileCode(int level, int sublevel)
 		strcpy(command,cmd.c_str());
 		exec(command);
 	}
-	else if(level == 4 )
+	/*else if(level == 4 )
 	{
 		//give correct input file
 		cmd = "C:\\Users\\FYP\\execForLevel";
@@ -75,7 +80,7 @@ bool compileCode(int level, int sublevel)
 		strcpy(command,cmd.c_str());
 		std::cout<<exec(command);
 		return 1;
-	}
+	}*/
 	t2 = clock();
 	executionTime = (float)((float)t2 - (float)t1) / CLOCKS_PER_SEC;
 	std::cout << executionTime;

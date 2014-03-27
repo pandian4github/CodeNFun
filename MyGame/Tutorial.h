@@ -16,7 +16,7 @@ void setSound(int level,int tutorial)
 	switch(level)
 	{
 	case 0:
-		soundForLevelTutorial[level][1]=soundForLevelTutorial[level][2]=soundForLevelTutorial[level][3]=soundForLevelTutorial[level][4]=soundForLevelTutorial[level][5]=1;
+		soundForLevelTutorial[level][1]=soundForLevelTutorial[level][2]=soundForLevelTutorial[level][3]=soundForLevelTutorial[level][4]=soundForLevelTutorial[level][5]=soundForLevelTutorial[level][6]=1;
 		break;
 	case 1:
 		soundForLevelTutorial[level][1] = soundForLevelTutorial[level][2] = soundForLevelTutorial[level][3] = soundForLevelTutorial[level][4] = 0;
@@ -25,6 +25,8 @@ void setSound(int level,int tutorial)
 	case 2:
 		break;
 	case 3:
+		break;
+	case 4:
 		break;
 	default:
 		std::cout<<"Error setting sound for level " << std::endl;
