@@ -10,12 +10,14 @@
 #include "Robo.h"
 #include "ImageLoader.h"
 #include "Tutorial.h"
+#include "Mission.h"
 #include "WinHttpClient.h"
 #include "Intellisense.h"
 #include "WebsiteInteractor.h"
 
 const int LEVEL = 1;
 const int TUTORIAL = 0;
+const int MISSION = 2;
 
 int deathflag;
 int showhero;
@@ -592,6 +594,10 @@ int main()
 				if(SCENE!=TUTORIAL)
 					SCENE=TUTORIAL;
 			}
+			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::M))
+			{
+				SCENE = MISSION;
+			}
 			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::U))
 			{
 				if(SCENE == TUTORIAL)
@@ -599,7 +605,12 @@ int main()
 					end_tutorial(level,tutorial);
 					if(level == 0)
 						levelChanged =1;
-					SCENE=LEVEL;
+					SCENE = LEVEL;
+				}
+				if(SCENE == MISSION)
+				{
+					//end_tutorial(level, noOfTutorials[level]);
+					SCENE = LEVEL;
 				}
 			}
 			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::N))
@@ -632,6 +643,24 @@ int main()
 					}
 				}
 			}
+			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::O))
+			{
+				if(SCENE == LEVEL && level < 4)
+				{
+					firsttime = true;
+					levelChanged = 1;
+				}
+			}
+			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+			{
+				if(SCENE == LEVEL && level > 1)
+				{
+					level = level - 2;
+					levelChanged = 1;
+					firsttime = true;
+				}
+			}
+
         }
 
 	//	std::cout << "level : " << level << std::endl;
@@ -781,6 +810,13 @@ int main()
 						window->draw(userText);
 					}
 				}
+				break;
+			case MISSION:
+				window->clear();
+				//init_tutorial(level, noOfTutorials[level]);
+				//show_tutorial(window);
+				init_mission(level, 1);
+				show_mission(window);
 				break;
 		}
 		window->display();

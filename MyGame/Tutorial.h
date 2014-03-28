@@ -35,7 +35,6 @@ void setSound(int level,int tutorial)
     
 void init_tutorial(int tutorialLevel,int tutorialNo)
 {
-	
 	std::string imageLocation = "Assets/tut";
 	imageLocation += std::to_string(tutorialLevel);
 	imageLocation += "_";
