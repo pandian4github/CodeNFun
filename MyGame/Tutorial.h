@@ -28,6 +28,10 @@ void setSound(int level,int tutorial)
 		break;
 	case 4:
 		break;
+	case 5:
+		break;
+	case 6:
+		break;
 	default:
 		std::cout<<"Error setting sound for level " << std::endl;
 	}
@@ -35,7 +39,6 @@ void setSound(int level,int tutorial)
     
 void init_tutorial(int tutorialLevel,int tutorialNo)
 {
-	
 	std::string imageLocation = "Assets/tut";
 	imageLocation += std::to_string(tutorialLevel);
 	imageLocation += "_";

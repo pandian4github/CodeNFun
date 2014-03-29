@@ -10,12 +10,14 @@
 #include "Robo.h"
 #include "ImageLoader.h"
 #include "Tutorial.h"
-#include "WinHttpClient.h"
+#include "Mission.h"
+//#include "WinHttpClient.h"
 #include "Intellisense.h"
-#include "WebsiteInteractor.h"
+//#include "WebsiteInteractor.h"
 
 const int LEVEL = 1;
 const int TUTORIAL = 0;
+const int MISSION = 2;
 
 int deathflag;
 int showhero;
@@ -57,7 +59,7 @@ void otherDisplays(int level, int subLevel)
 		animate_eva();
 		display_eva(window);
 	}
-	if(level == 2)
+	else if(level == 2)
 	{
 		if(subLevel == 1) //display int question 
 		{
@@ -94,11 +96,11 @@ void otherDisplays(int level, int subLevel)
 			display_image(window);
 		}
 	}
-	if(level == 3)
+	else if(level == 3)
 	{
 		;
 	}
-	if(level == 4)
+	else if(level == 4)
 	{
 		if(runsuccess == 1)
 		{
@@ -213,6 +215,188 @@ void otherDisplays(int level, int subLevel)
 			display_robo(window);
 		}
 	}
+	else if(level == 5)
+	{
+		animate_eva();
+		if(runsuccess == 1)
+		{
+			//animate
+			if(finishedMoving != 1)
+			{
+				if(!robo1Initialized)
+				{
+					if(move3==1)
+					{
+						Init_Robo3(710,98);//end
+						robo1Initialized=1;
+						robo2Initialized=0;
+					}
+					else if(move2==1)
+					{
+						Init_Robo3(555,98);//middle
+						robo1Initialized=1;
+						robo2Initialized=0;
+					}
+					else if(move1==1)
+					{
+						Init_Robo3(400,98);//start
+						robo1Initialized=1;
+						robo2Initialized=0;
+					}
+				}
+				if(!move3)
+				{
+					animate_robo_move(level);
+					finishedStanding=0;
+				}
+				else
+				{
+					finishedStanding = 1;
+					//Move Eva Up and change the collision rectangle
+					changeEvaPosition(level);
+				}
+			}
+			else
+			{
+				if(!robo2Initialized)
+				{
+					if(move3==1)
+					{
+						Init_Robo4(667,102);//end
+						robo2Initialized=1;
+						robo1Initialized=0;
+					}
+					else if(move2==1)
+					{
+						Init_Robo4(512,102);//middle
+						robo2Initialized=1;
+						robo1Initialized=0;
+					}
+					else if(move1==1)
+					{
+						Init_Robo4(359,102);//start
+						robo2Initialized=1;
+						robo1Initialized=0;
+					}
+				}
+				animate_robo_stand(level);
+				display_image(window);
+				if(finishedStanding)
+					finishedMoving=0;
+			}
+			if(move1 && move2 && move3)
+			{
+				if(finishedStanding)
+				{
+					set_Image(372,79,84,50,"Assets/numbers/5.png");
+					display_image(window);
+					set_Image(501,79,80,50,"Assets/numbers/6.png");
+					display_image(window);
+					set_Image(630,78,87,50,"Assets/numbers/4.png");
+					display_image(window);
+					//display 5,6 and 4
+				}
+				else
+				{
+					set_Image(372,79,84,50,"Assets/numbers/5.png");
+					display_image(window);
+					set_Image(501,79,80,50,"Assets/numbers/6.png");
+					display_image(window);
+					//display 5 and 6
+				}
+			}
+			else if(move1 && move2)
+			{
+				if(finishedMoving == 0)
+				{
+					set_Image(372,79,84,50,"Assets/numbers/5.png");
+					display_image(window);
+					set_Image(501,79,80,50,"Assets/numbers/6.png");
+					display_image(window);
+					//display 5 and 6
+				}
+				else
+				{
+					set_Image(372,79,84,50,"Assets/numbers/5.png");
+					display_image(window);
+					//display 5
+				}
+			}
+			else if(move1)
+			{
+				if(finishedStanding)
+				{
+					set_Image(372,79,84,50,"Assets/numbers/5.png");
+					display_image(window);
+					//display 5;
+				}
+				else
+				{
+					display_image(window);
+				}
+			}
+			else
+			{
+				display_image(window);
+			}
+			//end animation
+		}
+		display_eva(window);
+		display_robo(window);
+	}
+	else if(level == 6)
+	{
+		if(runsuccess == 1)
+		{
+			//display the text 2;
+			set_Image(292,244,196,90,"Assets/level6_text2.png");
+			display_image(window);
+		}
+		else
+		{
+			//display text 1;
+			set_Image(292,244,196,90,"Assets/level6_text1.png");
+			display_image(window);
+		}
+	}
+	else if(level == 7)
+	{
+		if(runsuccess == 1)
+		{
+			//display text1
+			set_Image(503,244,196,90,"Assets/level7_text2.png");
+			display_image(window);
+			int i;
+			for(i=0;i<5;i++)
+			{
+				if (crateMove[i]!=3)
+				{
+					animate_crate_move(i);
+					display_crate(window,i);
+					break;
+				}
+			}
+			for(i=0;i<5;i++)
+			{
+				if(crateMove[i]==3)
+				{
+					if(i==4)
+						display_crate(window,5); //crate at the start
+
+					display_crate(window,i);
+				}
+			}
+		}
+		else
+		{
+			//display text2
+			set_Image(503,244,196,90,"Assets/level7_text1.png");
+			display_image(window);
+			display_crate(window,0);
+		}
+		set_Image(616,347,50,132,"Assets/scientist_front.png");
+		display_image(window);
+	}
 }
 void otherInitializations(int level)
 {
@@ -220,9 +404,24 @@ void otherInitializations(int level)
 	{
 		Init_Eva(50,200);
 	}
-	if(level == 4)
+	else if(level == 4)
 	{
 		Init_Robo1(630,80);
+	}
+	else if(level == 5)
+	{
+		Init_Eva(169,288);
+		Init_Robo3(240,98);
+		finishedStanding = finishedMoving = move1 = move2 = move3 = robo1Initialized = robo2Initialized = 0;
+	}
+	else if(level == 7)
+	{
+		Init_Crate(191,383,0);
+		Init_Crate(191,383,1);
+		Init_Crate(191,383,2);
+		Init_Crate(191,383,3);
+		Init_Crate(191,383,4);
+		Init_Crate(191,383,5);
 	}
 	Init_Image();
 }
@@ -278,6 +477,12 @@ void checkCodeCompiled(int level, int subLevel)
 				}
 			}
 			break;
+	case 4:
+			break;
+	case 5:
+			break;
+	case 6:
+			break;
 	default:
 			break;
 	}
@@ -287,8 +492,12 @@ void collisionRectangleChange(int level,int subLevel)
 {
 	if(level == 2 && subLevel == 4)
 		myManager->changePosition(20,490,690,1,1);	//include the complete platform
-	if(level == 3)
+	else if(level == 3)
 		myManager->changePosition(0,0,1,1,1);		//gate opened
+	else if(level == 6)
+		myManager->changePosition(0,0,0,0,2);		//scientist gives way for player
+	else if(level == 7)
+		myManager->changePosition(0,0,0,0,2);		//scientist gives way for player
 }
 
 int main()
@@ -296,10 +505,10 @@ int main()
  
 	int SCENE = TUTORIAL;
 	int level = 0, tutorial = 1, subLevel = 1;
-	int noOfTutorials[6] = {6,6,10,2,12,4};
-	int noOfSubLevels[6] = {0,0,3,0,0,0};
-	int collisionRects[6] = {0,5,4,4,6,5};
-	int targetTimeInt[6] = {0, 75, 255, 120, 200, 200};
+	int noOfTutorials[8] = {6,6,10,2,12,4,4,4};
+	int noOfSubLevels[8] = {0,0,3,0,0,0,0,0};
+	int collisionRects[8] = {0,5,4,4,6,4,15,4};
+	int targetTimeInt[8] = {0, 75, 255, 120, 200, 200,200,200};
 	bool firsttime = true;
 	bool usernameEntered = false;
 	int playerTypeDefined = 0;
@@ -511,29 +720,41 @@ int main()
 						}
 						else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Return)
 						{
-							if(username.length() > 0)
-								usernameEntered = true;
-							else
+							if(password.length() > 0)
 							{
 								//do validation
-								int ret = checkLogin(username, password);
+								int ret = 1;
+								//ret = checkLogin(username, password);
 								if(ret == -1) {
 									std::cout << "Invalid username/password combination ! Try again." << std::endl << std::endl;
+									password = "";
+									passwordStar = "";
+									passText.setString("type password");
 									continue;
 								}
 								else
 									if(ret == -2) {
 										std::cout << "Server down ! Please try again." << std::endl << std::endl;
+										password = "";
+										passwordStar = "";
+										passText.setString("type password");
 										continue;
 									}
 									else {
 										level = ret;
 										std::cout << "Successfully logged in ! " << std::endl << std::endl;
 										user = username;
+										if(level != 1)
+											++tutorial;
+										init_tutorial(level, tutorial);
+										levelChanged = 1;
 										break;
 
 									}
 							}
+							else
+								if(username.length() > 0)
+									usernameEntered = true;
 
 						}
 						else if (event.type == sf::Event::TextEntered)
@@ -562,7 +783,7 @@ int main()
 				{
 					if(sf::Keyboard::isKeyPressed(sf::Keyboard::G))
 					{
-						cout<<"playerdefined";
+						std::cout<<"playerdefined";
 						playerTypeDefined = 1;
 					}
 					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::L)
@@ -581,6 +802,10 @@ int main()
 				if(SCENE!=TUTORIAL)
 					SCENE=TUTORIAL;
 			}
+			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::M))
+			{
+				SCENE = MISSION;
+			}
 			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::U))
 			{
 				if(SCENE == TUTORIAL)
@@ -588,7 +813,12 @@ int main()
 					end_tutorial(level,tutorial);
 					if(level == 0)
 						levelChanged =1;
-					SCENE=LEVEL;
+					SCENE = LEVEL;
+				}
+				if(SCENE == MISSION)
+				{
+					//end_tutorial(level, noOfTutorials[level]);
+					SCENE = LEVEL;
 				}
 			}
 			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::N))
@@ -621,8 +851,27 @@ int main()
 					}
 				}
 			}
+			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::O))
+			{
+				if(SCENE == LEVEL && level < 7)
+				{
+					firsttime = true;
+					levelChanged = 1;
+				}
+			}
+			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+			{
+				if(SCENE == LEVEL && level > 1)
+				{
+					level = level - 2;
+					levelChanged = 1;
+					firsttime = true;
+				}
+			}
+
         }
 
+	//	std::cout << "level : " << level << std::endl;
 
 		sf::Time time = gClock.getElapsedTime();
 		if(level >=1)
@@ -680,8 +929,9 @@ int main()
 				int pSize = programSize(level, subLevel);
 				int numberOfAttemptsTaken = 3 - attempts + 1;
 				printReport(secondsTakenToComplete, targetTimeInt[level], pSize, numberOfAttemptsTaken, performance, level, executionTime);
-				if(user.compare("guest") != 0)
-					updateLog(username, level, secondsTakenToComplete, numberOfAttemptsTaken, executionTime, pSize);
+				if(user.compare("guest") != 0){
+					//updateLog(username, level, secondsTakenToComplete, numberOfAttemptsTaken, executionTime, pSize);
+				}
 			}
 
 			attempts = 3;
@@ -769,6 +1019,13 @@ int main()
 						window->draw(userText);
 					}
 				}
+				break;
+			case MISSION:
+				window->clear();
+				//init_tutorial(level, noOfTutorials[level]);
+				//show_tutorial(window);
+				init_mission(level, 1);
+				show_mission(window);
 				break;
 		}
 		window->display();

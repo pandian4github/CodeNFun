@@ -38,18 +38,18 @@ void openCodingArea(int level, int sublevel)
 
 bool compileCode(int level, int sublevel)
 {
+	if(level >= 5 )
+	{
+		runsuccess = 1;
+		return 1;
+	}
+
 	//write your function here
 	std::cout<<"Compiling Code . . . " << std::endl << std::endl;
 
 	char command[1024];
 	std::string cmd,ret;
 
-	/*if(level == 4)
-	{
-		runsuccess=1;
-		return 1;
-	}*/
-	//create .exe
 	cmd = "C:\\Dev-Cpp\\MinGW64\\bin\\g++.exe C:\\Users\\FYP\\";
 	cmd += "codeForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".cpp -o C:\\Users\\FYP\\execForLevel" + std::to_string(level) + "_" + std::to_string(sublevel);
 	strcpy(command,cmd.c_str());
