@@ -144,7 +144,7 @@ int programSize(int level, int subLevel)
 }
 
 void printReport(int seconds, int targetSeconds, int pSize, int attempts, int performance, int level, float execTime) {
-	string performanceString[] = {"NEED TO WORK HARD", "NOT BAD", "AVERAGE", "GOOD", "EXCELLENT"};
+	std::string performanceString[] = {"NEED TO WORK HARD", "NOT BAD", "AVERAGE", "GOOD", "EXCELLENT"};
 	std::cout << std::endl << "---------------------- Report for level " << level << " ----------------------" << std::endl;
 	std::cout << "Target time for the level         :	" << targetSeconds << std::endl;
 	std::cout << "Time taken to complete the level  :	" << seconds << std::endl;

@@ -65,7 +65,39 @@ void collRectManager::initRects(int level)
 		myCollRect[4].setValues(720,365,50,100,1); //computer
 		myCollRect[5].setValues(5,280,1,270,1); //end
 		break;
+	case 5:
+		myCollRect = new collRect[4];
+		myCollRect[0].setValues(0,486,1000,1,0); //platform	
+		myCollRect[1].setValues(614,379,50,100,1); //computer
+		myCollRect[2].setValues(111,289,150,200,0); //robo initially blocking
+		myCollRect[3].setValues(0,289,1,270,1); //end
+		break;
+	case 6:
+		myCollRect = new collRect[15];
+		myCollRect[0].setValues(0,470,1000,1,0); //platform	
+		myCollRect[1].setValues(479,368,50,100,1); //computer
+		myCollRect[2].setValues(430,339,40,135,0); //man initially blocking
+		
+		myCollRect[4].setValues(323,438,40,70,0);
+		myCollRect[5].setValues(283,414,41,24,0);
+		myCollRect[6].setValues(248,386,34,30,0);
+		myCollRect[7].setValues(211,357,38,28,0);
+		myCollRect[8].setValues(175,333,36,26,0);
+		myCollRect[9].setValues(137,301,39,32,0);
+		myCollRect[10].setValues(102,270,33,30,0);
+		myCollRect[11].setValues(70,240,33,32,0);
+		myCollRect[12].setValues(34,211,36,28,0);
+		myCollRect[13].setValues(0,178,33,34,0);
 
+		myCollRect[14].setValues(0,0,20,270,1); //end
+		break;
+	case 7:
+		myCollRect = new collRect[4];
+		myCollRect[0].setValues(0,480,1000,1,0); //platform	
+		myCollRect[1].setValues(669,386,50,100,1); //computer
+		myCollRect[2].setValues(619,347,50,136,0); //scientist initially blocking
+		myCollRect[3].setValues(500,338,1,150,1); //end
+		break;
 	default:
 		std::cout<<"\nError initializing collision rectangles";
 	}

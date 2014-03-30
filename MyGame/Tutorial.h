@@ -28,6 +28,10 @@ void setSound(int level,int tutorial)
 		break;
 	case 4:
 		break;
+	case 5:
+		break;
+	case 6:
+		break;
 	default:
 		std::cout<<"Error setting sound for level " << std::endl;
 	}
