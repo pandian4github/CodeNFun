@@ -11,9 +11,9 @@
 #include "ImageLoader.h"
 #include "Tutorial.h"
 #include "Mission.h"
-//#include "WinHttpClient.h"
+#include "WinHttpClient.h"
 #include "Intellisense.h"
-//#include "WebsiteInteractor.h"
+#include "WebsiteInteractor.h"
 
 const int LEVEL = 1;
 const int TUTORIAL = 0;
@@ -505,7 +505,7 @@ int main()
  
 	int SCENE = TUTORIAL;
 	int level = 0, tutorial = 1, subLevel = 1;
-	int noOfTutorials[8] = {6,6,10,2,12,4,4,4};
+	int noOfTutorials[8] = {6,6,10,2,12,5,2,5};
 	int noOfSubLevels[8] = {0,0,3,0,0,0,0,0};
 	int collisionRects[8] = {0,5,4,4,6,4,15,4};
 	int targetTimeInt[8] = {0, 75, 255, 120, 200, 200,200,200};
@@ -724,7 +724,7 @@ int main()
 							{
 								//do validation
 								int ret = 1;
-								//ret = checkLogin(username, password);
+								ret = checkLogin(username, password);
 								if(ret == -1) {
 									std::cout << "Invalid username/password combination ! Try again." << std::endl << std::endl;
 									password = "";
@@ -742,7 +742,7 @@ int main()
 									}
 									else {
 										level = ret;
-										std::cout << "Successfully logged in ! " << std::endl << std::endl;
+										std::cout << "Successfully logged in ! level : " << level << std::endl << std::endl;
 										user = username;
 										if(level != 1)
 											++tutorial;
@@ -930,7 +930,7 @@ int main()
 				int numberOfAttemptsTaken = 3 - attempts + 1;
 				printReport(secondsTakenToComplete, targetTimeInt[level], pSize, numberOfAttemptsTaken, performance, level, executionTime);
 				if(user.compare("guest") != 0){
-					//updateLog(username, level, secondsTakenToComplete, numberOfAttemptsTaken, executionTime, pSize);
+					updateLog(username, level, secondsTakenToComplete, numberOfAttemptsTaken, executionTime, pSize);
 				}
 			}
 

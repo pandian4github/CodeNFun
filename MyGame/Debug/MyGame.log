@@ -1,4 +1,4 @@
-﻿Build started 31-03-2014 01:57:02.
+﻿Build started 31-03-2014 15:36:59.
      1>Project "C:\Users\user\Documents\Visual Studio 2012\Projects\MyGame\MyGame\MyGame.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\FYP\SFML-2.1\include" /IC:\Users\FYP\WinHttpClient_20100921\Common\Include /I"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\atlmfc\include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_DYNAMIC /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt GameEngine.cpp
@@ -23,4 +23,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.93
+Time Elapsed 00:00:03.48

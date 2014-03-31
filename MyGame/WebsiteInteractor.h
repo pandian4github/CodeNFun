@@ -7,11 +7,14 @@
 int checkLogin(std::string username, std::string password) {
 	
 	std::string url = "";
-	url.append("http://localhost/codenfun/checklogin-ext.php?username=");
+//	url.append("http://localhost/codenfun/checklogin-ext.php?username=");
+	url.append("http://a-ligue.in/codenfun/checklogin-ext.php?username=");
 	url.append(username);
 	url.append("&password=");
 	url.append(password);
 			
+	//std::cout << "url for checking login : " << url << std::endl;
+
 	std::wstring wurl(url.begin(), url.end());
 	
 	WinHttpClient client(wurl);
@@ -26,13 +29,14 @@ int checkLogin(std::string username, std::string password) {
 		response += (char)httpResponseContent.at(i);
 	}
 	
+	//std::cout << "response : " << response << std::endl;
 	if(response.at(0) == 'N')
 		return -1;
 	else
 		if(response.at(0) == 'Y') {
 			int l = 0;
 					
-			for(int i = 1; i < length; i++) {
+			for(int i = 1; i < length && response.at(i) >='0' && response.at(i) <= '9'; i++) {
 				l = l * 10 + response.at(i) - 48;
 			}
 			
@@ -48,7 +52,8 @@ int checkLogin(std::string username, std::string password) {
 void updateLog(std::string username, int level, int timetocomplete, int attempts, float executiontime, int programsize) {
 
 	std::string url = "";
-	url.append("http://localhost/codenfun/updatelog-ext.php?username=");
+//	url.append("http://localhost/codenfun/updatelog-ext.php?username=");
+	url.append("http://a-ligue.in/codenfun/updatelog-ext.php?username=");
 	url.append(username);
 	url.append("&level=");
 	url.append(std::to_string(level));
@@ -61,7 +66,7 @@ void updateLog(std::string username, int level, int timetocomplete, int attempts
 	url.append("&programsize=");
 	url.append(std::to_string(programsize));	
 			
-	std::cout << url << std::endl;
+	//std::cout << url << std::endl;
 
 	std::wstring wurl(url.begin(), url.end());
 	
@@ -77,7 +82,7 @@ void updateLog(std::string username, int level, int timetocomplete, int attempts
 		response += (char)httpResponseContent.at(i);
 	}
 	
-	std::cout << response << std::endl;
+	//std::cout << response << std::endl;
 	if(response.at(0) == 'Y')
 		std::cout << std::endl << "Log updated to the website successfully ! " << std::endl;
 
