@@ -635,17 +635,12 @@ int main()
  
 	int SCENE = TUTORIAL;
 	int level = 0, tutorial = 1, subLevel = 1;
-<<<<<<< HEAD
-	int noOfTutorials[8] = {6,6,10,2,12,5,2,5};
-	int noOfSubLevels[8] = {0,0,3,0,0,0,0,0};
-	int collisionRects[8] = {0,5,4,4,6,4,15,4};
-	int targetTimeInt[8] = {0, 75, 255, 120, 200, 200,200,200};
-=======
+
 	int noOfTutorials[9] = {6,6,10,2,12,4,4,4,4};
 	int noOfSubLevels[9] = {0,0,3,0,0,0,0,0,0};
 	int collisionRects[9] = {0,5,4,4,6,4,15,4,4};
 	int targetTimeInt[9] = {0, 75, 255, 120, 200, 200,200,200,200};
->>>>>>> efd9420978a389f903079719031aae39f62c8bb8
+
 	bool firsttime = true;
 	bool usernameEntered = false;
 	int playerTypeDefined = 0;
