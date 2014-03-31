@@ -1,14 +1,8 @@
-<<<<<<< HEAD
-﻿Build started 31-03-2014 18:55:49.
+﻿Build started 31-03-2014 19:46:02.
      1>Project "C:\Users\user\Documents\Visual Studio 2012\Projects\MyGame\MyGame\MyGame.vcxproj" on node 2 (Build target(s)).
-=======
-﻿Build started 3/31/2014 7:20:01 PM.
-     1>Project "C:\Users\Ashwin\documents\visual studio 2012\Projects\MyGame\MyGame\MyGame.vcxproj" on node 2 (Build target(s)).
->>>>>>> f77fae8da0f51bcb5d0aa9a23eaa47c768659a72
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\FYP\SFML-2.1\include" /IC:\Users\FYP\WinHttpClient_20100921\Common\Include /I"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\atlmfc\include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_DYNAMIC /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Animation.cpp GameEngine.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\FYP\SFML-2.1\include" /IC:\Users\FYP\WinHttpClient_20100921\Common\Include /I"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\atlmfc\include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_DYNAMIC /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt GameEngine.cpp
          GameEngine.cpp
-<<<<<<< HEAD
      1>c:\users\user\documents\visual studio 2012\projects\mygame\mygame\compilationunit.h(40): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : see declaration of 'strcpy'
      1>c:\users\user\documents\visual studio 2012\projects\mygame\mygame\compilationunit.h(60): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
@@ -19,40 +13,13 @@
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : see declaration of 'strcpy'
      1>c:\users\user\documents\visual studio 2012\projects\mygame\mygame\compilationunit.h(96): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>c:\users\user\documents\visual studio 2012\projects\mygame\mygame\gameengine.cpp(656): warning C4101: 'choice' : unreferenced local variable
-=======
-     1>c:\users\ashwin\documents\visual studio 2012\projects\mygame\mygame\compilationunit.h(35): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>c:\users\ashwin\documents\visual studio 2012\projects\mygame\mygame\compilationunit.h(55): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>c:\users\ashwin\documents\visual studio 2012\projects\mygame\mygame\compilationunit.h(65): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>c:\users\ashwin\documents\visual studio 2012\projects\mygame\mygame\compilationunit.h(72): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>c:\users\ashwin\documents\visual studio 2012\projects\mygame\mygame\compilationunit.h(90): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>c:\users\ashwin\documents\visual studio 2012\projects\mygame\mygame\gameengine.cpp(868): warning C4101: 'choice' : unreferenced local variable
-         Generating Code...
-     1>c:\users\ashwin\documents\visual studio 2012\projects\mygame\mygame\compilationunit.h(136): warning C4715: 'compileCode' : not all control paths return a value
-         Skipping... (no relevant changes detected)
-         Animation.cpp
->>>>>>> f77fae8da0f51bcb5d0aa9a23eaa47c768659a72
+     1>c:\users\user\documents\visual studio 2012\projects\mygame\mygame\gameengine.cpp(870): warning C4101: 'choice' : unreferenced local variable
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Ashwin\documents\visual studio 2012\Projects\MyGame\Debug\MyGame.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\FYP\SFML-2.1\lib" /LIBPATH:"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\atlmfc\lib" "sfml-main-d.lib" "sfml-window-d.lib" "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Ashwin\documents\visual studio 2012\Projects\MyGame\Debug\MyGame.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Ashwin\documents\visual studio 2012\Projects\MyGame\Debug\MyGame.lib" /MACHINE:X86 Debug\Animation.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\user\Documents\Visual Studio 2012\Projects\MyGame\Debug\MyGame.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\FYP\SFML-2.1\lib" /LIBPATH:"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\atlmfc\lib" "sfml-main-d.lib" "sfml-window-d.lib" "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\user\Documents\Visual Studio 2012\Projects\MyGame\Debug\MyGame.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\user\Documents\Visual Studio 2012\Projects\MyGame\Debug\MyGame.lib" /MACHINE:X86 Debug\Animation.obj
          Debug\GameEngine.obj
-<<<<<<< HEAD
          MyGame.vcxproj -> C:\Users\user\Documents\Visual Studio 2012\Projects\MyGame\Debug\MyGame.exe
      1>Done Building Project "C:\Users\user\Documents\Visual Studio 2012\Projects\MyGame\MyGame\MyGame.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.47
-=======
-         LINK : C:\Users\Ashwin\documents\visual studio 2012\Projects\MyGame\Debug\MyGame.exe not found or not built by the last incremental link; performing full link
-         MyGame.vcxproj -> C:\Users\Ashwin\documents\visual studio 2012\Projects\MyGame\Debug\MyGame.exe
-     1>Done Building Project "C:\Users\Ashwin\documents\visual studio 2012\Projects\MyGame\MyGame\MyGame.vcxproj" (Build target(s)).
-
-Build succeeded.
-
-Time Elapsed 00:00:03.73
->>>>>>> f77fae8da0f51bcb5d0aa9a23eaa47c768659a72
+Time Elapsed 00:00:03.82

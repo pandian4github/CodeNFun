@@ -63,14 +63,14 @@ bool compileCode(int level, int sublevel)
 	clock_t t1, t2;
 	t1 = clock();
 	//run the .exe
-	if(level ==1 || level == 2 || level == 4 || level == 5 || level == 6 || level == 11)
+	if(level ==1 || level == 2 || level == 4 || level == 5 || level == 6)
 	{
 		cmd = "C:\\Users\\FYP\\execForLevel";
 		cmd += std::to_string(level) + "_" + std::to_string(sublevel) + ".exe > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt";
 		strcpy(command,cmd.c_str());
 		exec(command);
 	}
-	else if(level == 3 || level == 7 || level == 8 || level == 9 || level == 10)
+	else if(level == 3 || level == 7 || level == 8 || level == 9 || level == 10 || level == 11)
 	{
 		cmd = "C:\\Users\\FYP\\execForLevel";
 		cmd += std::to_string(level) + "_" + std::to_string(sublevel) + ".exe < C:\\Users\\FYP\\inputForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt";
