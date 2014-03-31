@@ -98,6 +98,13 @@ void collRectManager::initRects(int level)
 		myCollRect[2].setValues(619,347,50,136,0); //scientist initially blocking
 		myCollRect[3].setValues(500,338,1,150,1); //end
 		break;
+	case 8:
+		myCollRect = new collRect[4];
+		myCollRect[0].setValues(0,478,1000,1,0); //platform	
+		myCollRect[1].setValues(662,382,50,100,1); //computer
+		myCollRect[2].setValues(590,344,50,136,0); //scientist initially blocking
+		myCollRect[3].setValues(0,338,1,150,1); //end
+		break;
 	default:
 		std::cout<<"\nError initializing collision rectangles";
 	}
