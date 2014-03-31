@@ -848,10 +848,12 @@ int main()
  
 	int SCENE = TUTORIAL;
 	int level = 0, tutorial = 1, subLevel = 1;
+
 	int noOfTutorials[12] = {6,6,10,2,12,4,4,4,4,6,3,4};
 	int noOfSubLevels[12] = {0,0,3,0,0,0,0,0,0,0,0,3};
 	int collisionRects[12] = {0,5,4,4,6,4,15,4,4,4,4,4};
 	int targetTimeInt[12] = {0, 75, 255, 120, 200, 200,200,200,200,200,200,200};
+
 	bool firsttime = true;
 	bool usernameEntered = false;
 	int playerTypeDefined = 0;
@@ -1088,7 +1090,7 @@ int main()
 									}
 									else {
 										level = ret;
-										std::cout << "Successfully logged in ! " << std::endl << std::endl;
+										std::cout << "Successfully logged in ! level : " << level << std::endl << std::endl;
 										user = username;
 										if(level != 1)
 											++tutorial;
