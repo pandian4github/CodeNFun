@@ -352,8 +352,17 @@ void otherDisplays(int level, int subLevel)
 		if(runsuccess == 1)
 		{
 			//display the text 2;
-			set_Image(292,244,196,90,"Assets/level6_text2.png");
-			display_image(window);
+			if(isLoopUsed(level))
+			{
+				runsuccess = 0;
+				set_Image(292,244,196,90,"Assets/level6_text1.png");
+				display_image(window);
+			}
+			else
+			{
+				set_Image(292,244,196,90,"Assets/level6_text2.png");
+				display_image(window);
+			}
 		}
 		else
 		{
@@ -1411,7 +1420,7 @@ int main()
 			}
 		}
 
-		if(subLevelChanged)
+		if(subLevelChanged && runsuccess == 1)
 		{
 			if(subLevel <= noOfSubLevels[level])
 			{

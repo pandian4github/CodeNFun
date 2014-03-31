@@ -145,6 +145,31 @@ void displayHintIfRequired(int level) {
 
 }
 
+bool isLoopUsed(int level)
+{
+	std::ifstream inp;
+	std::string fileLocation = "C:\\Users\\FYP\\level" + std::to_string(level) + "_include.h";// + std::to_string(subLevel) + ".cpp";
+	inp.open(fileLocation);
+	//std::cout << "inside isLoopUsed function ! " << std::endl;
+	for( std::string line; getline( inp, line ); )
+	{
+		if(line.compare("") == 0)
+			continue;
+	//	std::cout << line << " :::::" << line.length() << std::endl;
+		if(line.length() >5)
+		{
+			for(int i = 0; i < line.length()-2; i++)
+				if(line[i] == 'f' && line[i+1] == 'o' && line[i+2] == 'r')
+					return true;
+			for(int i = 0; i < line.length()-4; i++)
+				if(line[i] == 'w' && line[i+1] == 'h' && line[i+2] == 'i' && line[i+3] == 'l' && line[i+4] == 'e')
+					return true;
+		}
+	}
+	return false;
+
+}
+
 int programSize(int level, int subLevel)
 {
 	std::ifstream inp;

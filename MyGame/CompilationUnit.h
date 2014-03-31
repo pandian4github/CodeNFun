@@ -41,6 +41,18 @@ void openCodingArea(int level, int sublevel)
 	exec(command);
 }
 
+void cleardiff()
+{
+	std::ofstream oup("C:\\Users\\FYP\\diff.txt", std::ios_base::app);
+	oup << "clear";
+}
+
+void clearsolution(int level, int sublevel)
+{
+		std::ofstream oup("C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt",  std::ios_base::app);
+		oup << "";
+}
+
 bool compileCode(int level, int sublevel)
 {
 	if(level >= 12 )
@@ -48,6 +60,9 @@ bool compileCode(int level, int sublevel)
 		runsuccess = 1;
 		return 1;
 	}
+
+	cleardiff();
+	clearsolution(level, sublevel);
 
 	//write your function here
 	std::cout<<"Compiling Code . . . " << std::endl << std::endl;
