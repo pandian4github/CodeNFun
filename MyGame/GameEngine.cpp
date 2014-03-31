@@ -580,6 +580,7 @@ void checkCodeCompiled(int level, int subLevel)
 				 if(runsuccess == 1)
 				 {
 					set_Image(645, 20, 155, 136, "Assets/move_up.png");
+					changeEvaPosition(level);
 					display_image(window);
 				 }
 			break;

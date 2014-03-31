@@ -29,7 +29,12 @@ void openCodingArea(int level, int sublevel)
 	char command[1024];
 
 	std::string cmd = "C:\\Dev-Cpp\\devcpp.exe C:\\Users\\FYP\\";
-	cmd += "codeForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) +".cpp";
+	if(level == 6) {
+		cmd += "level" + std::to_string(level) + "_include.h";
+	}
+	else {
+		cmd += "codeForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) +".cpp";
+	}
 
 	std::cout << std::endl << "Start Coding ! " << std::endl << std::endl;
 	strcpy(command,cmd.c_str());
@@ -38,7 +43,7 @@ void openCodingArea(int level, int sublevel)
 
 bool compileCode(int level, int sublevel)
 {
-	if(level >= 5 )
+	if(level >= 12 )
 	{
 		runsuccess = 1;
 		return 1;
@@ -58,20 +63,21 @@ bool compileCode(int level, int sublevel)
 	clock_t t1, t2;
 	t1 = clock();
 	//run the .exe
-	if(level ==1 || level == 2 || level ==4)
+	if(level ==1 || level == 2 || level == 4 || level == 5 || level == 6 || level == 11)
 	{
 		cmd = "C:\\Users\\FYP\\execForLevel";
 		cmd += std::to_string(level) + "_" + std::to_string(sublevel) + ".exe > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt";
 		strcpy(command,cmd.c_str());
 		exec(command);
 	}
-	else if(level == 3)
+	else if(level == 3 || level == 7 || level == 8 || level == 9 || level == 10)
 	{
 		cmd = "C:\\Users\\FYP\\execForLevel";
-		cmd += std::to_string(level) + "_" + std::to_string(sublevel) + ".exe < C:\\Users\\FYP\\inputForLevel3_1.txt > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt";
+		cmd += std::to_string(level) + "_" + std::to_string(sublevel) + ".exe < C:\\Users\\FYP\\inputForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt > C:\\Users\\FYP\\solForLevel" + std::to_string(level) + "_" + std::to_string(sublevel) + ".txt";
 		strcpy(command,cmd.c_str());
 		exec(command);
 	}
+	std::cout << cmd;
 	/*else if(level == 4 )
 	{
 		//give correct input file
@@ -101,7 +107,9 @@ bool compileCode(int level, int sublevel)
 
 	if(temp!=std::string::npos)
 	{
-		if(level == 1)
+		runsuccess = 1;
+		return 1;
+		/*if(level == 1)
 		{
 			//std::cout<<"\nSuccess for level 1";
 			runsuccess = 1;
@@ -125,7 +133,7 @@ bool compileCode(int level, int sublevel)
 			std::cout<<"\nSuccess for level 4";
 			runsuccess = 1;
 			return 1;
-		}
+		}*/
 	}
 	else
 	{
