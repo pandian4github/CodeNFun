@@ -565,7 +565,7 @@ int main()
 	}//while loop ends
 	*/
 
-	window=new sf::RenderWindow(sf::VideoMode(1000,562), "Final Year Project",sf::Style::Close);
+	window=new sf::RenderWindow(sf::VideoMode(1000,562), "Code N Fun",sf::Style::Close);
 	window->setFramerateLimit(20);
 
 	showhero = 1;
