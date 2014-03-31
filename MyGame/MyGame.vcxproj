@@ -90,6 +90,7 @@
     <ClInclude Include="CompilationUnit.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="ImageLoader.h" />
+    <ClInclude Include="Mission.h" />
     <ClInclude Include="Robo.h" />
     <ClInclude Include="Intellisense.h" />
     <ClInclude Include="Tutorial.h" />

@@ -880,10 +880,10 @@ int main()
 	int SCENE = TUTORIAL;
 	int level = 0, tutorial = 1, subLevel = 1;
 
-	int noOfTutorials[13] = {6,6,10,2,12,4,4,4,4,6,3,4,4};
+	int noOfTutorials[13] = {6,6,10,2,12,6,3,6,6,7,4,9,4};
 	int noOfSubLevels[13] = {0,0,3,0,0,0,0,0,0,0,0,3,0};
 	int collisionRects[13] = {0,5,4,4,6,4,15,4,4,4,4,4,4};
-	int targetTimeInt[13] = {0, 75, 255, 120, 200, 200,200,200,200,200,200,200,200};
+	int targetTimeInt[13] = {0, 75, 255, 120, 100, 100,150,230,250,450,500,550, 200};
 
 	bool firsttime = true;
 	bool usernameEntered = false;
@@ -1464,11 +1464,14 @@ int main()
 			int sec = (int)lTime.asSeconds();
 			if(sec >=3) {
 				showhero = 1;
-				myHero->setPosition(800, 300);
+				if(level == 11)
+					myHero->setPosition(900, 350);
+				else
+					myHero->setPosition(800, 300);
 			}
 		}
 
-		if(subLevelChanged && runsuccess == 1)
+		if((subLevelChanged && runsuccess == 1) || (subLevelChanged && level == 11))
 		{
 			if(subLevel <= noOfSubLevels[level])
 			{
@@ -1544,8 +1547,11 @@ int main()
 			init_tutorial(level,tutorial);
 			otherInitializations(level);
 			//HERO
-
-			myHero = new Hero(800,300);
+			
+			if(level == 11)
+				myHero = new Hero(900,350);
+			else
+				myHero = new Hero(800,300);
 			myHero->setLevel(level);
 			myHero->setSubLevel(subLevel);
 			myManager->setTotalRects(collisionRects[level]);

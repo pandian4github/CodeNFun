@@ -16,5 +16,6 @@
     <ClInclude Include="WebsiteInteractor.h" />
     <ClInclude Include="CompilationUnit.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="Mission.h" />
   </ItemGroup>
 </Project>
