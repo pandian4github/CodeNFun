@@ -175,12 +175,27 @@ void Hero::handle_input()
 	{
 		if(touches_computer==true)
 		{
-			wpressed = 1;
-			if(compileCode(level,subLevel))			//successful execution of program
+			if(level!=11)
 			{
-				subLevelChanged = 1;
+				wpressed = 1;
+				if(compileCode(level,subLevel))			//successful execution of program
+				{
+					subLevelChanged = 1;
+				}
+				touches_computer=false;
 			}
-			touches_computer=false;
+			else
+			{
+				if(subLevel == 3)
+				{
+					wpressed = 1;
+					if(compileCode(level,subLevel))			//successful execution of program
+					{
+						subLevelChanged = 1;
+					}
+					touches_computer=false;
+				}
+			}
 		}
 	}
 	

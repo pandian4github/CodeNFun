@@ -26,6 +26,9 @@ int correctTreeInsertions = 0;
 int correctEntryMade = -1;
 sf::RenderWindow *window;
 sf::Text attemptsText;
+sf::Text treeInput;
+
+std::string treeInp = "";
 
 void collisionRectangleChange(int,int);
 
@@ -516,6 +519,16 @@ void otherDisplays(int level, int subLevel)
 	}
 	if(level == 11)
 	{
+		if(runsuccess == 1)
+		{
+			set_Image(705,232,197,90,"Assets/level11_text6.png");
+			display_image(window);
+		}
+		else
+		{
+			set_Image(705,232,197,90,"Assets/level11_text5.png");
+			display_image(window);
+		}
 		if(subLevel == 1)
 		{
 			int i=0;
@@ -675,7 +688,7 @@ void otherDisplays(int level, int subLevel)
 				display_image(window);
 			}
 		}
-		else if(subLevel == 2)
+		else if(subLevel == 2 || subLevel == 3)
 		{
 			set_Image(325,59,50,50, "Assets/numbers/50.png");
 			display_image(window);
@@ -722,8 +735,13 @@ void otherDisplays(int level, int subLevel)
 			set_Image(496,334,50,50, "Assets/numbers/75.png");
 			display_image(window);
 
-			set_Image(114,412,492,20,"Assets/level11_text4.png");
-			display_image(window);
+			if(subLevel==2)
+			{
+				set_Image(114,412,492,20,"Assets/level11_text4.png");
+				display_image(window);
+			}
+
+			window->draw(treeInput);
 		}
 	}
 }
@@ -841,6 +859,8 @@ void collisionRectangleChange(int level,int subLevel)
 		myManager->changePosition(0,0,0,0,2);		//scientist gives way for player
 	else if(level == 8 || level == 10)
 		myManager->changePosition(0,0,0,0,2);		//scientist gives way for player
+	else if(level == 11)
+		myManager->changePosition(0,0,0,0,2);		//scientist gives way for player
 }
 
 int main()
@@ -849,10 +869,10 @@ int main()
 	int SCENE = TUTORIAL;
 	int level = 0, tutorial = 1, subLevel = 1;
 
-	int noOfTutorials[12] = {6,6,10,2,12,4,4,4,4,6,3,4};
-	int noOfSubLevels[12] = {0,0,3,0,0,0,0,0,0,0,0,3};
-	int collisionRects[12] = {0,5,4,4,6,4,15,4,4,4,4,4};
-	int targetTimeInt[12] = {0, 75, 255, 120, 200, 200,200,200,200,200,200,200};
+	int noOfTutorials[13] = {6,6,10,2,12,4,4,4,4,6,3,4,4};
+	int noOfSubLevels[13] = {0,0,3,0,0,0,0,0,0,0,0,3,0};
+	int collisionRects[13] = {0,5,4,4,6,4,15,4,4,4,4,4,4};
+	int targetTimeInt[13] = {0, 75, 255, 120, 200, 200,200,200,200,200,200,200,200};
 
 	bool firsttime = true;
 	bool usernameEntered = false;
@@ -940,11 +960,14 @@ int main()
 	sf::Text passwordText("Password:",comicFont,35);
 	sf::Text userText("type username",font,35);
 	sf::Text passText("type password",font,35);
-	sf::Text treeInput("",font,20);
 
 	guestInfo.setColor(sf::Color::Black);
 	guestInfo.setPosition(128,265);
+	
+	treeInput.setFont(font);
+	treeInput.setCharacterSize(18);
 	treeInput.setPosition(84,433);
+	treeInput.setString("");
 	
 	usernameText.setColor(sf::Color::Black);
 	passwordText.setColor(sf::Color::Black);
@@ -1004,7 +1027,7 @@ int main()
 
 
 	Hero *myHero;
-
+	bool gameCompleted = 0;
 	//BACKGROUND
 
 	//std::cout << "levels completed : " << level << std::endl;
@@ -1016,8 +1039,14 @@ int main()
     while (window->isOpen())
     {
         sf::Event event;
+
 		if(gameover == 1)
 			break;
+		if(gameCompleted == 1)
+		{
+			set_Image(0,0,1000,562,"Assets/background12.png");
+			display_image(window);
+		}
         while (window->pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
@@ -1376,7 +1405,26 @@ int main()
 				{
 					if (event.type == sf::Event::TextEntered)
 					{
-
+						if(event.text.unicode < 128 && event.text.unicode > 31)
+						{
+							treeInp += static_cast<char>(event.text.unicode);
+							treeInput.setString(treeInp);
+						}
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::BackSpace)
+					{
+						if(treeInp.length() > 0)
+						{
+							treeInp = treeInp.substr(0,treeInp.length() - 1);
+							treeInput.setString(treeInp);
+						}
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Return)
+					{
+						if(treeInp.compare("10,15,20,30,35,40,45,50,55,60,65,70,75,80,85") == 0)
+						{
+							subLevelChanged = 1;
+						}
 					}
 				}
 			}
@@ -1417,10 +1465,16 @@ int main()
 			}
 			collisionRectangleChange(level,subLevel);
 			subLevelChanged = 0;
+
+			if(level==11 && subLevel==3)
+			{
+				treeInput.setString("Simulate the tree using a C program");
+			}
 		}
 
 		if(levelChanged)
 		{
+						
 			levelDifficulty = AVERAGE;
 			timeToIncrease = timeToDecrease = 0;
 			hintRequired = false;
@@ -1494,6 +1548,11 @@ int main()
 		switch(SCENE)
 		{
 			case LEVEL:
+				if(level==12)
+				{
+					window->draw(*bgsprite);
+					break;
+				}
 				myHero->handle_input();
 				myHero->update(myManager);
 				window->clear();
