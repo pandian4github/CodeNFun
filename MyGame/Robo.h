@@ -8,6 +8,7 @@
 
 sf::Sprite *robosprite;
 sf::Sprite *cratesprite[7];
+sf::Sprite *chargesprite[2];
 sf::Texture robotex;
 
 int frame_count1,frame_count2;
@@ -83,6 +84,42 @@ void Init_Robo4(int x,int y)
 	robo2Initialized=1; //same variable used for robo2 is used 
 }
 
+void Init_Robo5(int x,int y,int num)
+{
+	std::string roboPath = "Assets/robo5.png";
+	if(!robotex.loadFromFile(roboPath))
+	{
+		std::cout<<"\nError loading robo5_ "<<num;
+	}
+	cratesprite[num]=new sf::Sprite();
+	cratesprite[num]->setTexture(robotex);
+	cratesprite[num]->setTextureRect(sf::IntRect(0,0,41,79));
+	cratesprite[num]->setPosition((float)x,(float)y);
+
+	frame_cnt[num] = -1;
+	switch(num)
+	{
+	case 0:
+		crateMove[num] = 4;
+		break;
+	case 1:
+		crateMove[num] = 3;
+		break;
+	case 2:
+		crateMove[num] = 2;
+		break;
+	case 3:
+		crateMove[num] = 1;
+		break;
+	case 4:
+		crateMove[num] = 0;
+		break;
+	default:
+		break;
+	}
+	
+}
+
 void Init_Crate(int x,int y,int num)
 {
 	std::string woodenCratePath = "Assets/wooden_crate" + std::to_string(num) + ".png";
@@ -97,6 +134,20 @@ void Init_Crate(int x,int y,int num)
 
 	frame_cnt[num] = -1;
 	crateMove[num] = 0;
+}
+
+void Init_Charge(int x,int y, int num)
+{
+	std::string woodenCratePath = "Assets/charge" + std::to_string(num) + ".png";
+	if(!robotex.loadFromFile(woodenCratePath))
+	{
+		std::cout<<"\nError loading charge "<<num;
+	}
+
+	chargesprite[num]=new sf::Sprite();
+	chargesprite[num]->setTexture(robotex);
+	chargesprite[num]->setTextureRect(sf::IntRect(0,0,125,154));
+	chargesprite[num]->setPosition((float)x,(float)y);
 }
 
 void animate_crate_move(int num)

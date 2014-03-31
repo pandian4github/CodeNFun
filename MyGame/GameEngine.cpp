@@ -26,6 +26,8 @@ int gameover;
 sf::RenderWindow *window;
 sf::Text attemptsText;
 
+void collisionRectangleChange(int,int);
+
 std::string getStringTime(int num)
 {
 	std::string ret = "";
@@ -397,6 +399,120 @@ void otherDisplays(int level, int subLevel)
 		set_Image(616,347,50,132,"Assets/scientist_front.png");
 		display_image(window);
 	}
+	if(level ==8)
+	{
+		if(runsuccess == 1)
+		{
+			//process the queue and then finish the animation
+			int i,flag=0;
+
+			frame_count1 = (frame_count1+1)%41;
+			if(frame_count1>39)
+			{
+				finishedMoving = !finishedMoving;
+				if(finishedMoving)
+					for(i=0;i<5;i++)
+					{
+						if(crateMove[i]<=5)
+						{
+							crateMove[i]++;
+							if(crateMove[4]==6)
+								collisionRectangleChange(level,subLevel);
+						}
+					}
+			}
+			if(!finishedMoving)
+			{
+				for(i=0;i<5;i++)
+				{
+					flag=1;
+					switch (crateMove[i])
+					{
+					case 4:
+						cratesprite[i]->move(-2,0);
+						display_crate(window,i);
+						break;
+					case 3:
+						cratesprite[i]->move(-1.5,0);
+						display_crate(window,i);
+						break;
+					case 2:
+						cratesprite[i]->move(-1.5,0);
+						display_crate(window,i);
+						break;
+					case 1:
+						cratesprite[i]->move(-1.5,0);
+						display_crate(window,i);
+						break;
+					case 0:
+						cratesprite[i]->move(-1.5,0);
+						display_crate(window,i);
+						break;
+					default:
+						flag=0;
+						break;
+					}
+				}
+			}
+			else
+			{
+				for(i=0;i<5;i++)
+				{
+					if(crateMove[i]<=5)
+					{
+						display_crate(window,i);
+						flag=1;
+					}
+				}
+			}
+			if(flag == 1)
+			{
+				if(frame_count1<11 || (frame_count1>20 && frame_count1<31))
+				{
+					set_Image(0,285,125,154,"Assets/charge0.png");
+					display_image(window);
+				}
+				else
+				{
+					set_Image(0,285,125,154,"Assets/charge1.png");
+					display_image(window);
+				}
+			}
+		}
+		else
+		{
+			//animate the charge
+			//use frame_count1 for charge
+			set_Image(110,374,41,79,"Assets/robo5.png");
+			display_image(window);
+
+			set_Image(174,374,41,79,"Assets/robo5.png");
+			display_image(window);
+
+			set_Image(238,374,41,79,"Assets/robo5.png");
+			display_image(window);
+
+			set_Image(302,374,41,79,"Assets/robo5.png");
+			display_image(window);
+
+			set_Image(366,374,41,79,"Assets/robo5.png");
+			display_image(window);
+
+			frame_count1 = (frame_count1+1)%21;
+			if(frame_count1<11)
+			{
+				set_Image(0,285,125,154,"Assets/charge0.png");
+				display_image(window);
+			}
+			else
+			{
+				set_Image(0,285,125,154,"Assets/charge1.png");
+				display_image(window);
+			}
+		}
+		set_Image(596,349,50,132,"Assets/scientist_front.png");
+		display_image(window);
+	}
 }
 void otherInitializations(int level)
 {
@@ -422,6 +538,17 @@ void otherInitializations(int level)
 		Init_Crate(191,383,3);
 		Init_Crate(191,383,4);
 		Init_Crate(191,383,5);
+	}
+	else if(level == 8)
+	{
+		Init_Robo5(110,374,0);
+		Init_Robo5(174,374,1);
+		Init_Robo5(238,374,2);
+		Init_Robo5(302,374,3);
+		Init_Robo5(366,374,4);
+
+		frame_count1 = 0;
+		finishedMoving = 0;
 	}
 	Init_Image();
 }
@@ -482,6 +609,7 @@ void checkCodeCompiled(int level, int subLevel)
 	case 5:
 			break;
 	case 6:
+			frame_count1=0;
 			break;
 	default:
 			break;
@@ -498,6 +626,8 @@ void collisionRectangleChange(int level,int subLevel)
 		myManager->changePosition(0,0,0,0,2);		//scientist gives way for player
 	else if(level == 7)
 		myManager->changePosition(0,0,0,0,2);		//scientist gives way for player
+	else if(level == 8)
+		myManager->changePosition(0,0,0,0,2);		//scientist gives way for player
 }
 
 int main()
@@ -505,10 +635,17 @@ int main()
  
 	int SCENE = TUTORIAL;
 	int level = 0, tutorial = 1, subLevel = 1;
+<<<<<<< HEAD
 	int noOfTutorials[8] = {6,6,10,2,12,5,2,5};
 	int noOfSubLevels[8] = {0,0,3,0,0,0,0,0};
 	int collisionRects[8] = {0,5,4,4,6,4,15,4};
 	int targetTimeInt[8] = {0, 75, 255, 120, 200, 200,200,200};
+=======
+	int noOfTutorials[9] = {6,6,10,2,12,4,4,4,4};
+	int noOfSubLevels[9] = {0,0,3,0,0,0,0,0,0};
+	int collisionRects[9] = {0,5,4,4,6,4,15,4,4};
+	int targetTimeInt[9] = {0, 75, 255, 120, 200, 200,200,200,200};
+>>>>>>> efd9420978a389f903079719031aae39f62c8bb8
 	bool firsttime = true;
 	bool usernameEntered = false;
 	int playerTypeDefined = 0;
@@ -821,7 +958,7 @@ int main()
 					SCENE = LEVEL;
 				}
 			}
-			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::N))
+			else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::N)//f(sf::Keyboard::isKeyPressed(sf::Keyboard::N))
 			{
 				if(SCENE == TUTORIAL)
 				{
@@ -853,7 +990,7 @@ int main()
 			}
 			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::O))
 			{
-				if(SCENE == LEVEL && level < 7)
+				if(SCENE == LEVEL && level < 8)
 				{
 					firsttime = true;
 					levelChanged = 1;

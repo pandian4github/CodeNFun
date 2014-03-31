@@ -501,7 +501,26 @@ bool Hero::Touches_Bricks(collRectManager *myManager)
 						}
 					}
 					break;
-
+				case 8:
+					if(check_collision(box,myManager->myCollRect[i].box)==true)
+					{
+						if(touches_computer==false && i==1 ) //1st  collision rectangle is computer collision rectangle
+						{
+							touches_computer=true;
+						}
+						else if( i == 3 )
+						{
+							levelChanged=1;
+						}
+					}
+					else
+					{
+						if( i == 1 )
+						{
+							touches_computer = false;
+						}
+					}
+					break;
 				default:
 					std::cout<<"\nError with collision rectangle detection";
 					break;
