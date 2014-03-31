@@ -115,9 +115,58 @@ void displayHintIfRequired(int level) {
 			case 3 : hintText.setString("Hint : All you need is to use two statements scanf and printf, with the variables in the same order");
 					 hintText.setPosition(10, 460);
 					 break;
+			case 4 : hintText.setString("Hint : The program will start with moveRobo() function and will have isDoorOpen() inside if()");
+					 hintText.setPosition(10, 55);
+					 break;
+			case 5 : hintText.setString("Hint:The code should start with moveRobo() and should have appropriate pressButton inside the loops");
+					 hintText.setPosition(10, 230);
+					 break;
+			case 6 : hintText.setString("Hint : The base condition to exit will be checking if currentpos is equal to len");
+					 hintText.setPosition(10, 460);
+					 break;
+			case 7 : hintText.setString("Hint:Increment and decrement top at push and pop");
+					 hintText.setPosition(500, 40);
+					 break;
+			case 8 : hintText.setString("Hint : Increment back during enqueue and increment front during dequeue");
+					 hintText.setPosition(100, 60);
+					 break;
+			case 9 : hintText.setString("Hint : The program will start with moveRobo() function and will have appropriate pressButton inside loop");
+					 hintText.setPosition(10, 460);
+					 break;
+			case 10 : hintText.setString("Hint : The program will start with moveRobo() function and will have appropriate pressButton inside loop");
+					  hintText.setPosition(10, 460);
+					  break;
+			case 11 : hintText.setString("Hint : The program will start with moveRobo() function and will have appropriate pressButton inside loop");
+					  hintText.setPosition(10, 460);
+					  break;
 	
 		}
 	}
+
+}
+
+bool isLoopUsed(int level)
+{
+	std::ifstream inp;
+	std::string fileLocation = "C:\\Users\\FYP\\level" + std::to_string(level) + "_include.h";// + std::to_string(subLevel) + ".cpp";
+	inp.open(fileLocation);
+	//std::cout << "inside isLoopUsed function ! " << std::endl;
+	for( std::string line; getline( inp, line ); )
+	{
+		if(line.compare("") == 0)
+			continue;
+	//	std::cout << line << " :::::" << line.length() << std::endl;
+		if(line.length() >5)
+		{
+			for(int i = 0; i < line.length()-2; i++)
+				if(line[i] == 'f' && line[i+1] == 'o' && line[i+2] == 'r')
+					return true;
+			for(int i = 0; i < line.length()-4; i++)
+				if(line[i] == 'w' && line[i+1] == 'h' && line[i+2] == 'i' && line[i+3] == 'l' && line[i+4] == 'e')
+					return true;
+		}
+	}
+	return false;
 
 }
 

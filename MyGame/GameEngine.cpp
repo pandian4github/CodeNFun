@@ -11,9 +11,9 @@
 #include "ImageLoader.h"
 #include "Tutorial.h"
 #include "Mission.h"
-//#include "WinHttpClient.h"
+#include "WinHttpClient.h"
 #include "Intellisense.h"
-//#include "WebsiteInteractor.h"
+#include "WebsiteInteractor.h"
 
 const int LEVEL = 1;
 const int TUTORIAL = 0;
@@ -355,8 +355,17 @@ void otherDisplays(int level, int subLevel)
 		if(runsuccess == 1)
 		{
 			//display the text 2;
-			set_Image(292,244,196,90,"Assets/level6_text2.png");
-			display_image(window);
+			if(isLoopUsed(level))
+			{
+				runsuccess = 0;
+				set_Image(292,244,196,90,"Assets/level6_text1.png");
+				display_image(window);
+			}
+			else
+			{
+				set_Image(292,244,196,90,"Assets/level6_text2.png");
+				display_image(window);
+			}
 		}
 		else
 		{
@@ -805,12 +814,14 @@ void checkCodeCompiled(int level, int subLevel)
 	case 1 : if(runsuccess == 0)
 			 {
 				set_Image(645, 20, 155, 136, "Assets/try_again.png");
+				changeEvaPosition(level);
 				display_image(window);
 			 }
 			 else
 				 if(runsuccess == 1)
 				 {
 					set_Image(645, 20, 155, 136, "Assets/move_up.png");
+					changeEvaPosition(level);
 					display_image(window);
 				 }
 			break;
@@ -1101,7 +1112,7 @@ int main()
 							{
 								//do validation
 								int ret = 1;
-								//ret = checkLogin(username, password);
+								ret = checkLogin(username, password);
 								if(ret == -1) {
 									std::cout << "Invalid username/password combination ! Try again." << std::endl << std::endl;
 									password = "";
@@ -1183,7 +1194,7 @@ int main()
 			{
 				SCENE = MISSION;
 			}
-			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::U))
+			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::U) || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
 				if(SCENE == TUTORIAL)
 				{
@@ -1457,7 +1468,7 @@ int main()
 			}
 		}
 
-		if(subLevelChanged)
+		if(subLevelChanged && runsuccess == 1)
 		{
 			if(subLevel <= noOfSubLevels[level])
 			{
@@ -1495,7 +1506,7 @@ int main()
 				int numberOfAttemptsTaken = 3 - attempts + 1;
 				printReport(secondsTakenToComplete, targetTimeInt[level], pSize, numberOfAttemptsTaken, performance, level, executionTime);
 				if(user.compare("guest") != 0){
-					//updateLog(username, level, secondsTakenToComplete, numberOfAttemptsTaken, executionTime, pSize);
+					updateLog(username, level, secondsTakenToComplete, numberOfAttemptsTaken, executionTime, pSize);
 				}
 			}
 
