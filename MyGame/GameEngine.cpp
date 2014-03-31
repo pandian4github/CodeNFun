@@ -695,7 +695,7 @@ int main()
 	}//while loop ends
 	*/
 
-	window=new sf::RenderWindow(sf::VideoMode(1000,562), "Final Year Project",sf::Style::Close);
+	window=new sf::RenderWindow(sf::VideoMode(1000,562), "Code N Fun",sf::Style::Close);
 	window->setFramerateLimit(20);
 
 	showhero = 1;
@@ -951,7 +951,7 @@ int main()
 					SCENE = LEVEL;
 				}
 			}
-			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::N))
+			else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::N)//f(sf::Keyboard::isKeyPressed(sf::Keyboard::N))
 			{
 				if(SCENE == TUTORIAL)
 				{
