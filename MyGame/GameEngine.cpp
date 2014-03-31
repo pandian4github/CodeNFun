@@ -11,9 +11,9 @@
 #include "ImageLoader.h"
 #include "Tutorial.h"
 #include "Mission.h"
-#include "WinHttpClient.h"
+//#include "WinHttpClient.h"
 #include "Intellisense.h"
-#include "WebsiteInteractor.h"
+//#include "WebsiteInteractor.h"
 
 const int LEVEL = 1;
 const int TUTORIAL = 0;
@@ -22,7 +22,8 @@ const int MISSION = 2;
 int deathflag;
 int showhero;
 int gameover;
-
+int correctTreeInsertions = 0;
+int correctEntryMade = -1;
 sf::RenderWindow *window;
 sf::Text attemptsText;
 
@@ -361,7 +362,7 @@ void otherDisplays(int level, int subLevel)
 			display_image(window);
 		}
 	}
-	else if(level == 7)
+	else if(level == 7 || level == 9)
 	{
 		if(runsuccess == 1)
 		{
@@ -399,7 +400,7 @@ void otherDisplays(int level, int subLevel)
 		set_Image(616,347,50,132,"Assets/scientist_front.png");
 		display_image(window);
 	}
-	if(level ==8)
+	if(level == 8 || level == 10)
 	{
 		if(runsuccess == 1)
 		{
@@ -513,6 +514,218 @@ void otherDisplays(int level, int subLevel)
 		set_Image(596,349,50,132,"Assets/scientist_front.png");
 		display_image(window);
 	}
+	if(level == 11)
+	{
+		if(subLevel == 1)
+		{
+			int i=0;
+			for(i=0;i<16;i++)
+			{
+				if(i==1 && correctTreeInsertions>=i)
+				{
+					set_Image(325,59,50,50, "Assets/numbers/50.png");
+					display_image(window);
+				}
+				else if(i==2 && correctTreeInsertions>=i)
+				{
+					set_Image(190,152,50,50, "Assets/numbers/30.png");
+					display_image(window);
+				}
+				else if(i==3 && correctTreeInsertions>=i)
+				{
+					set_Image(258,247,50,50, "Assets/numbers/40.png");
+					display_image(window);
+				}
+				else if(i==4 && correctTreeInsertions>=i)
+				{
+					set_Image(223,335,50,50, "Assets/numbers/35.png");
+					display_image(window);
+				}
+				else if(i==5 && correctTreeInsertions>=i)
+				{
+					set_Image(464,152,50,50, "Assets/numbers/70.png");
+					display_image(window);
+				}
+				else if(i==6 && correctTreeInsertions>=i)
+				{
+					set_Image(123,247,50,50, "Assets/numbers/15.png");
+					display_image(window);
+				}
+				else if(i==7 && correctTreeInsertions>=i)
+				{
+					set_Image(292,334,50,50, "Assets/numbers/45.png");
+					display_image(window);
+				}
+				else if(i==8 && correctTreeInsertions>=i)
+				{
+					set_Image(395,247,50,50, "Assets/numbers/60.png");
+					display_image(window);
+				}
+				else if(i==9 && correctTreeInsertions>=i)
+				{
+					set_Image(90,334,50,50, "Assets/numbers/10.png");
+					display_image(window);
+				}
+				else if(i==10 && correctTreeInsertions>=i)
+				{
+					set_Image(429,334,50,50, "Assets/numbers/65.png");
+					display_image(window);
+				}
+				else if(i==11 && correctTreeInsertions>=i)
+				{
+					set_Image(531,247,50,50, "Assets/numbers/80.png");
+					display_image(window);
+				}
+				else if(i==12 && correctTreeInsertions>=i)
+				{
+					set_Image(565,334,50,50, "Assets/numbers/85.png");
+					display_image(window);
+				}
+				else if(i==13 && correctTreeInsertions>=i)
+				{
+					set_Image(158,334,50,50, "Assets/numbers/20.png");
+					display_image(window);
+				}
+				else if(i==14 && correctTreeInsertions>=i)
+				{
+					set_Image(362,334,50,50, "Assets/numbers/55.png");
+					display_image(window);
+				}
+				else if(i==15 && correctTreeInsertions>=i)
+				{
+					set_Image(496,334,50,50, "Assets/numbers/75.png");
+					display_image(window);
+				}
+				switch(correctTreeInsertions)
+				{
+				case 0:
+					set_Image(80,70,50,50, "Assets/numbers/50.png");
+					display_image(window);
+					break;
+				case 1:
+					set_Image(80,70,50,50, "Assets/numbers/30.png");
+					display_image(window);
+					break;
+				case 2:
+					set_Image(80,70,50,50, "Assets/numbers/40.png");
+					display_image(window);
+					break;
+				case 3:
+					set_Image(80,70,50,50, "Assets/numbers/35.png");
+					display_image(window);
+					break;
+				case 4:
+					set_Image(80,70,50,50, "Assets/numbers/70.png");
+					display_image(window);
+					break;
+				case 5:
+					set_Image(80,70,50,50, "Assets/numbers/15.png");
+					display_image(window);
+					break;
+				case 6:
+					set_Image(80,70,50,50, "Assets/numbers/45.png");
+					display_image(window);
+					break;
+				case 7:
+					set_Image(80,70,50,50, "Assets/numbers/60.png");
+					display_image(window);
+					break;
+				case 8:
+					set_Image(80,70,50,50, "Assets/numbers/10.png");
+					display_image(window);
+					break;
+				case 9:
+					set_Image(80,70,50,50, "Assets/numbers/65.png");
+					display_image(window);
+					break;
+				case 10:
+					set_Image(80,70,50,50, "Assets/numbers/80.png");
+					display_image(window);
+					break;
+				case 11:
+					set_Image(80,70,50,50, "Assets/numbers/85.png");
+					display_image(window);
+					break;
+				case 12:
+					set_Image(80,70,50,50, "Assets/numbers/20.png");
+					display_image(window);
+					break;
+				case 13:
+					set_Image(80,70,50,50, "Assets/numbers/55.png");
+					display_image(window);
+					break;
+				case 14:
+					set_Image(80,70,50,50, "Assets/numbers/75.png");
+					display_image(window);
+					break;
+				default:
+					break;
+				}
+				if(correctEntryMade==1)
+				{
+					set_Image(316,430,100,50,"Assets/level11_text2.png");
+					display_image(window);
+				}
+				else if(correctEntryMade == 0)
+				{
+					set_Image(316,430,100,50,"Assets/level11_text3.png");
+					display_image(window);
+				}
+				set_Image(80,50,55,20,"Assets/level11_text1.png");
+				display_image(window);
+			}
+		}
+		else if(subLevel == 2)
+		{
+			set_Image(325,59,50,50, "Assets/numbers/50.png");
+			display_image(window);
+			
+			set_Image(190,152,50,50, "Assets/numbers/30.png");
+			display_image(window);
+			
+			set_Image(258,247,50,50, "Assets/numbers/40.png");
+			display_image(window);
+			
+			set_Image(223,335,50,50, "Assets/numbers/35.png");
+			display_image(window);
+			
+			set_Image(464,152,50,50, "Assets/numbers/70.png");
+			display_image(window);
+
+			set_Image(123,247,50,50, "Assets/numbers/15.png");
+			display_image(window);
+			
+			set_Image(292,334,50,50, "Assets/numbers/45.png");
+			display_image(window);
+			
+			set_Image(395,247,50,50, "Assets/numbers/60.png");
+			display_image(window);
+			
+			set_Image(90,334,50,50, "Assets/numbers/10.png");
+			display_image(window);
+			
+			set_Image(429,334,50,50, "Assets/numbers/65.png");
+			display_image(window);
+			
+			set_Image(531,247,50,50, "Assets/numbers/80.png");
+			display_image(window);
+			
+			set_Image(565,334,50,50, "Assets/numbers/85.png");
+			display_image(window);
+			
+			set_Image(158,334,50,50, "Assets/numbers/20.png");
+			display_image(window);
+			
+			set_Image(362,334,50,50, "Assets/numbers/55.png");
+			display_image(window);
+			
+			set_Image(496,334,50,50, "Assets/numbers/75.png");
+			display_image(window);
+
+			set_Image(114,412,492,20,"Assets/level11_text4.png");
+			display_image(window);
+		}
+	}
 }
 void otherInitializations(int level)
 {
@@ -530,7 +743,7 @@ void otherInitializations(int level)
 		Init_Robo3(240,98);
 		finishedStanding = finishedMoving = move1 = move2 = move3 = robo1Initialized = robo2Initialized = 0;
 	}
-	else if(level == 7)
+	else if(level == 7 || level == 9)
 	{
 		Init_Crate(191,383,0);
 		Init_Crate(191,383,1);
@@ -539,7 +752,7 @@ void otherInitializations(int level)
 		Init_Crate(191,383,4);
 		Init_Crate(191,383,5);
 	}
-	else if(level == 8)
+	else if(level == 8 || level == 10)
 	{
 		Init_Robo5(110,374,0);
 		Init_Robo5(174,374,1);
@@ -625,9 +838,9 @@ void collisionRectangleChange(int level,int subLevel)
 		myManager->changePosition(0,0,1,1,1);		//gate opened
 	else if(level == 6)
 		myManager->changePosition(0,0,0,0,2);		//scientist gives way for player
-	else if(level == 7)
+	else if(level == 7 || level == 9)
 		myManager->changePosition(0,0,0,0,2);		//scientist gives way for player
-	else if(level == 8)
+	else if(level == 8 || level == 10)
 		myManager->changePosition(0,0,0,0,2);		//scientist gives way for player
 }
 
@@ -637,10 +850,10 @@ int main()
 	int SCENE = TUTORIAL;
 	int level = 0, tutorial = 1, subLevel = 1;
 
-	int noOfTutorials[9] = {6,6,10,2,12,4,4,4,4};
-	int noOfSubLevels[9] = {0,0,3,0,0,0,0,0,0};
-	int collisionRects[9] = {0,5,4,4,6,4,15,4,4};
-	int targetTimeInt[9] = {0, 75, 255, 120, 200, 200,200,200,200};
+	int noOfTutorials[12] = {6,6,10,2,12,4,4,4,4,6,3,4};
+	int noOfSubLevels[12] = {0,0,3,0,0,0,0,0,0,0,0,3};
+	int collisionRects[12] = {0,5,4,4,6,4,15,4,4,4,4,4};
+	int targetTimeInt[12] = {0, 75, 255, 120, 200, 200,200,200,200,200,200,200};
 
 	bool firsttime = true;
 	bool usernameEntered = false;
@@ -728,14 +941,17 @@ int main()
 	sf::Text passwordText("Password:",comicFont,35);
 	sf::Text userText("type username",font,35);
 	sf::Text passText("type password",font,35);
+	sf::Text treeInput("",font,20);
 
 	guestInfo.setColor(sf::Color::Black);
 	guestInfo.setPosition(128,265);
+	treeInput.setPosition(84,433);
 	
 	usernameText.setColor(sf::Color::Black);
 	passwordText.setColor(sf::Color::Black);
 	userText.setColor(sf::Color::Black);
 	passText.setColor(sf::Color::Black);
+	treeInput.setColor(sf::Color::Black);
 	
 	usernameText.setPosition(270,245);
 	passwordText.setPosition(270,305);
@@ -857,7 +1073,7 @@ int main()
 							{
 								//do validation
 								int ret = 1;
-								ret = checkLogin(username, password);
+								//ret = checkLogin(username, password);
 								if(ret == -1) {
 									std::cout << "Invalid username/password combination ! Try again." << std::endl << std::endl;
 									password = "";
@@ -986,7 +1202,7 @@ int main()
 			}
 			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::O))
 			{
-				if(SCENE == LEVEL && level < 8)
+				if(SCENE == LEVEL && level < 11)
 				{
 					firsttime = true;
 					levelChanged = 1;
@@ -1001,7 +1217,170 @@ int main()
 					firsttime = true;
 				}
 			}
+			if(level == 11)
+			{
+				if(subLevel == 1)
+				{
+					if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Num0)
+					{
+						if(correctTreeInsertions==0)
+						{
+							correctTreeInsertions++;
+							correctEntryMade = 1;
+						}
+						else
+							correctEntryMade = 0;
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Num1)
+					{
+						if(correctTreeInsertions==1)
+						{
+							correctTreeInsertions++;
+							correctEntryMade = 1;
+						}
+						else
+							correctEntryMade = 0;
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Num2)
+					{
+						if(correctTreeInsertions==4)
+						{
+							correctTreeInsertions++;
+							correctEntryMade = 1;
+						}
+						else
+							correctEntryMade = 0;
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Num3)
+					{
+						if(correctTreeInsertions==5)
+						{
+							correctTreeInsertions++;
+							correctEntryMade = 1;
+						}
+						else
+							correctEntryMade = 0;
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Num4)
+					{
+						if(correctTreeInsertions==2)
+						{
+							correctTreeInsertions++;
+							correctEntryMade = 1;
+						}
+						else
+							correctEntryMade = 0;
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Num5)
+					{
+						if(correctTreeInsertions==7)
+						{
+							correctTreeInsertions++;
+							correctEntryMade = 1;
+						}
+						else
+							correctEntryMade = 0;
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Num6)
+					{
+						if(correctTreeInsertions==10)
+						{
+							correctTreeInsertions++;
+							correctEntryMade = 1;
+						}
+						else
+							correctEntryMade = 0;
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Num7)
+					{
+						if(correctTreeInsertions==8)
+						{
+							correctTreeInsertions++;
+							correctEntryMade = 1;
+						}
+						else
+							correctEntryMade = 0;
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Num8)
+					{
+						if(correctTreeInsertions==12)
+						{
+							correctTreeInsertions++;
+							correctEntryMade = 1;
+						}
+						else
+							correctEntryMade = 0;
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Num9)
+					{
+						if(correctTreeInsertions==3)
+						{
+							correctTreeInsertions++;
+							correctEntryMade = 1;
+						}
+						else
+							correctEntryMade = 0;
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::A)
+					{
+						if(correctTreeInsertions==6)
+						{
+							correctTreeInsertions++;
+							correctEntryMade = 1;
+						}
+						else
+							correctEntryMade = 0;
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::B)
+					{
+						if(correctTreeInsertions==13)
+						{
+							correctTreeInsertions++;
+							correctEntryMade = 1;
+						}
+						else
+							correctEntryMade = 0;
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::D)
+					{
+						if(correctTreeInsertions==9)
+						{
+							correctTreeInsertions++;
+							correctEntryMade = 1;
+						}
+						else
+							correctEntryMade = 0;
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::E)
+					{
+						if(correctTreeInsertions==14)
+						{
+							correctTreeInsertions++;
+							correctEntryMade = 1;
+							subLevelChanged = 1;
+						}
+						else
+							correctEntryMade = 0;
+					}
+					else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::F)
+					{
+						if(correctTreeInsertions==11)
+						{
+							correctTreeInsertions++;
+							correctEntryMade = 1;
+						}
+						else
+							correctEntryMade = 0;
+					}
+				}
+				else if(subLevel == 2)
+				{
+					if (event.type == sf::Event::TextEntered)
+					{
 
+					}
+				}
+			}
         }
 
 	//	std::cout << "level : " << level << std::endl;
@@ -1063,7 +1442,7 @@ int main()
 				int numberOfAttemptsTaken = 3 - attempts + 1;
 				printReport(secondsTakenToComplete, targetTimeInt[level], pSize, numberOfAttemptsTaken, performance, level, executionTime);
 				if(user.compare("guest") != 0){
-					updateLog(username, level, secondsTakenToComplete, numberOfAttemptsTaken, executionTime, pSize);
+					//updateLog(username, level, secondsTakenToComplete, numberOfAttemptsTaken, executionTime, pSize);
 				}
 			}
 
